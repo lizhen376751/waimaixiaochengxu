@@ -1,0 +1,35 @@
+<view class="container">
+  <view class="header {{scrollDown?'scrolled':''}}">
+    <view class="search" bindtap="tapSearch">
+      <image class="icon" src="/imgs/index/icon_search.png" />
+      <i class="fa fa-home"></i>
+      黄焖鸡米饭
+    </view>
+  </view>
+
+  <scroll-view scroll-y="true" scroll-into-view="{{scrollIntoView}}" bindscroll="onScroll" bindscrolltolower="toprequest">
+    <swiper class="banner" indicator-dots="true" autoplay="true" interval="3000" duration="500">
+      <block wx:for="{{banners}}" wx:key="id">
+        <swiper-item>
+          <image data-id="{{index}}" src="{{item.img}}" />
+        </swiper-item>
+      </block>
+    </swiper>
+
+    <view class="layer">
+      <view class="shoplist" wx:for="{{shops}}" wx:key="id" id='{{shops.id}}' wx:for-item="item">
+
+        <view class='shopsimage' bindtap="tapName" data-id="{{item.id}}">
+          <image class='shopimage' src="{{item.img}}" />
+        </view>
+        <view class="shopattr" bindtap="tapName" data-id="{{item.id}}">
+          <view class='shopname'>{{item.name}}</view>
+          <view class='shopaddress'>{{item.address}}</view>
+          <view class='shopdesc'>{{item.desc}}</view>
+        </view>
+
+      </view>
+    </view>
+    <view class="loading">努力加载中…</view>
+  </scroll-view>
+</view>
