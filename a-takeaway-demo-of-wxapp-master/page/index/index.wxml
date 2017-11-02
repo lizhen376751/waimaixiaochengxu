@@ -7,7 +7,7 @@
     </view>
   </view>
 
-  <scroll-view scroll-y="true" scroll-into-view="{{scrollIntoView}}" bindscroll="onScroll" bindscrolltolower="toprequest">
+  <scroll-view scroll-y="true" style="height: {{windowHeight}}px; width: {{windowWidth}}px;" scroll-into-view="{{scrollIntoView}}" bindscroll="onScroll" bindscrolltolower="toprequest">
     <swiper class="banner" indicator-dots="true" autoplay="true" interval="3000" duration="500">
       <block wx:for="{{banners}}" wx:key="id">
         <swiper-item>
@@ -30,6 +30,6 @@
 
       </view>
     </view>
-    <view class="loading">努力加载中…</view>
+    <view hidden='{{isshow}}' class="loading">努力加载中…</view>
   </scroll-view>
 </view>

@@ -15,7 +15,7 @@
 					<image class="pic" src="{{itemName.pic}}"></image>
 					<view class="name ellipsis">{{itemName.name}}</view>
 					<view class="price">￥{{itemName.price}}</view>
-					<view class="addCart" bindtap="tapAddCart" data-id="{{id}}">
+					<view class="addCart" bindtap="tapAddCart" data-id="{{itemName.id}}">
 						<image src="/imgs/shop/plus.png"></image>
 					</view>
 				</view>

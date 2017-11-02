@@ -212,29 +212,13 @@ Page({
     wx.showModal({
       showCancel: false,
       title: '恭喜',
-      content: '订单发送成功！下订单过程顺利完成，本例不再进行后续订单相关的功能。',
+      content: '下单成功！',
       success: function (res) {
         if (res.confirm) {
           wx.navigateBack();
         }
       }
     })
-		// server.sendTemplate(e.detail.formId, null, function (res) {
-		// 	if (res.data.errorcode == 0) {
-		// 		wx.showModal({
-		// 			showCancel: false,
-		// 			title: '恭喜',
-		// 			content: '订单发送成功！下订单过程顺利完成，本例不再进行后续订单相关的功能。',
-		// 			success: function(res) {
-		// 				if (res.confirm) {
-		// 					wx.navigateBack();
-		// 				}
-		// 			}
-		// 		})
-		// 	}
-		// }, function (res) {
-		// 	console.log(res)
-		// });
 	}
 });
 

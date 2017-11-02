@@ -71,8 +71,8 @@
 
 .result scroll-view {
 	position: absolute;
-	top: 200rpx;
-	bottom: 0;
+	top: 110rpx;
+	bottom: 10rpx;
 	left: 0;
 	right: 0;
 	background: #fff;
@@ -83,8 +83,32 @@
 	border-bottom: 1rpx solid #efefef;
 }
 
+.result .shop .shopconnection {
+  display: -webkit-flex;
+}
+.result .shop .shopname{
+  padding: 10rpx 20rpx;
+}
+.result .shop .shopname .itemname{
+ font-size: 45rpx;
+ font-weight:600;
+ margin-bottom: 15rpx;
+}
+.result .shop .shopname .itemaddress{
+   font-size: 30rpx;
+ color: #696969;
+ margin-bottom: 10rpx;
+}
+.result .shop .shopname .itemdesc{
+   color: #feb70f;
+  font-size: 30rpx;
+  padding-right: 15rpx;
+  height:160rpx;
+  overflow : hidden;
+}
 .result .shop image {
-	width: 100%;
+  margin-left:20rpx; 
+	width: 255rpx;
 	height: 266rpx;
 }
 

@@ -4,6 +4,7 @@ Page({
 	data: {
 		filterId: 1,
 		address: '定位中…',
+    isshow : true,
 		banners: [
 			{
 				id: 3,
@@ -28,6 +29,14 @@ Page({
 	},
 	onLoad: function () {
 		var self = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        self.setData({
+          windowHeight: res.windowHeight,
+          windowWidth: res.windowWidth
+        })  
+      }
+    })
 		wx.getLocation({
 			type: 'gcj02',
 			success: function (res) {
@@ -109,19 +118,15 @@ Page({
     })
   },
   toprequest :function(e){
-    console.log(e);
-    wx.showModal({
-      title: '顶部',
-      content: "请求数据",
-      showCancel: true,
-      success: function (res) {
-        if (res.confirm) {
-          console.log('用户点击确定')
-        } else if (res.cancel) {
-          console.log('用户点击取消')
-        }
-      }
-    })
+    var that = this;
+    var shopmsg = that.data.shops;
+    for (var i = 0; i < app.globalData.shops1.length; i++) {
+      shopmsg.push(app.globalData.shops1[i]);
+    }
+    that.setData({
+      shops: shopmsg,
+      isshow: false,
+    });
   }
 });
 
