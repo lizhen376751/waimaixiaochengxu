@@ -103,32 +103,32 @@ App({
 			success: function (res) {
         console.log(pp + "登录了..." + res);
 				console.log('wx.login', res)
-				server.getJSON('/WxAppApi/setUserSessionKey', {code: res.code}, function (res) {
-					console.log('setUserSessionKey', res)
-					self.rd_session = res.data.data.rd_session;
-					self.globalData.hasLogin = true;
-					wx.setStorageSync('rd_session', self.rd_session);
-					self.getUserInfo();
-				});
+        self.getUserInfo();
+				// server.getJSON('/WxAppApi/setUserSessionKey', {code: res.code}, function (res) {
+				// 	console.log('setUserSessionKey', res)
+				// 	self.rd_session = res.data.data.rd_session;
+				// 	self.globalData.hasLogin = true;
+				// 	wx.setStorageSync('rd_session', self.rd_session);
+				
+				// });
 			}
 		});
 	},
 	getUserInfo: function() {
-		var self = this;
-		wx.getUserInfo({
-			success: function(res) {
-				console.log('getUserInfo=', res)
-				self.globalData.userInfo = res.userInfo;
-				server.getJSON('/WxAppApi/checkSignature', {
-					rd_session: self.rd_session,
-					result: res
-				}, function (res) {
-					console.log('checkSignature', res)
-					if (res.data.errorcode) {
-						// TODO:验证有误处理
-					}
-				});
-			}
-		});
+    var self = this;
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userInfo']) {
+          wx.getUserInfo({
+            success: function (res) {
+              console.log('getUserInfo=', res)
+              self.globalData.userInfo = res.userInfo;
+            }
+          });
+        }
+      }
+    })
+	
+	
 	}
 })

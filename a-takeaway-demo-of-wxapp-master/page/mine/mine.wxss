@@ -1,6 +1,7 @@
 .header {
 	background: #feb70f;
 	padding: 30rpx;
+  height: 300rpx;
 }
 .header .avatar {
 	display: block;
@@ -16,28 +17,26 @@
 	line-height: 2.4;
 	text-align: center;
 }
-
-.section {
-	padding: 0;
-	color: #2e2e2e;
-	font-size: 30rpx;
+.orderview {
+  margin-top: 20rpx;
+  background: white;
 }
-.section .line {
-	margin-left: 30rpx;
-	padding-right: 30rpx;
-	line-height: 3;
-	border-bottom: 1px solid #efefef;
+.orderview .scroll{
+  display: -webkit-flex;
 }
-.section .line:last-child {
-	border-bottom: none;
+.orderview .scroll .imageview{
+  margin: 0 15rpx;
 }
-.section .line:before {
-	content: '>';
-	float: right;
-	color: #aaa;
-	margin-left: 20rpx;
+.orderview .scroll .imageview .image{
+  position: relative;
+  border-radius: 50%;
+  width: 180rpx;
+  height: 180rpx;
 }
-.section .line .tl {
-	float: right;
-	color: #aaa;
+ .line {
+	clear: both;
+	width: 100%;
+	height: 1px;
+	border-bottom: 1px dashed #000;
+	padding-top: 20rpx;
 }

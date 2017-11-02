@@ -1,9 +1,29 @@
 <view class="container">
-	<view class="header">
-		<image class="avatar" src="{{userInfo.avatarUrl}}" />
-		<view class="nickname">{{userInfo.nickName}}</view>
-	</view>
-	<view class="section">
-		<view class="line judgement">我的订单</view>
-	</view>
+  <view class="header">
+    <image class="avatar" src="{{userInfo.avatarUrl}}" />
+    <view class="nickname">{{userInfo.nickName}}</view>
+  </view>
+
+
+  <view class="orderview">
+    <scroll-view  scroll-y="true">
+      <view class="scroll" wx:for="{{order}}" wx:key="{{order.id}}" wx:for-index="id" id="{{order.id}}" wx:for-item="item">
+        <view class='imageview'>
+          <image class="image" src="{{item.img}}"> </image>
+        </view>
+        <view>
+          <view>{{item.name}}</view>
+          <view>{{item.address}}</view>
+          <view>{{item.id}}</view>
+          <view class="line"></view>
+          <view>for循环
+            <view>点的食物</view>
+          </view>
+          <view>共几件商品,实付款</view>
+          <view>再来一单</view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
 </view>
