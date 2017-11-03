@@ -1,0 +1,30 @@
+.orderheader{
+  background: #feb70f;
+  color: white;
+  text-align:center;
+  font-size: 45rpx;
+  /* padding-bottom: 20rpx; */
+}
+.order{
+  margin:20rpx 0; 
+  padding: 20rpx;
+  /* border: 2px solid #000; */
+  font-size: 32rpx;
+  color: #787878;
+  background: #FFFAFA;
+}
+.order .orderone{
+  display: -webkit-flex; 
+  /* border: 2px solid #000; */
+  margin: 10rpx;
+}
+.order .orderone .ordertwo{
+  width:25%;
+}
+.order .orderone .orderthree{
+  color: #000;
+}
+.header{
+  background: #FFFAFA;
+  display: -webkit-flex; 
+}

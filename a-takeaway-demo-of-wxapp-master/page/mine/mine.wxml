@@ -5,25 +5,38 @@
   </view>
 
 
-  <view class="orderview">
-    <scroll-view  scroll-y="true">
-      <view class="scroll" wx:for="{{order}}" wx:key="{{order.id}}" wx:for-index="id" id="{{order.id}}" wx:for-item="item">
-        <view class='imageview'>
-          <image class="image" src="{{item.img}}"> </image>
-        </view>
-        <view>
-          <view>{{item.name}}</view>
-          <view>{{item.address}}</view>
-          <view>{{item.id}}</view>
-          <view class="line"></view>
-          <view>for循环
-            <view>点的食物</view>
+    <scroll-view scroll-y="true" class='scroll'>
+
+      <view  wx:for="{{order}}" wx:key="{{order.id}}" wx:for-index="id" id="{{order.id}}" wx:for-item="item">
+     
+      
+      <view class='view1'>
+          <view class='imageview'>
+            <image class="image" src="{{item.img}}"> </image>
           </view>
-          <view>共几件商品,实付款</view>
-          <view>再来一单</view>
+          <view class='itemdec'>
+            <view class='itemname'>{{item.name}} ({{item.address}})</view>
+            <view class='itemid'>订单编号 : {{item.id}}</view>
+          </view>
         </view>
+        <view class="viewline" ></view>
+
+        <view class='view2' wx:for="{{item.foods}}" wx:key="{{item.foods.id}}" wx:for-index="id" id="{{item.foods.id}}" wx:for-item="foodsitem">
+          <view class='foodsitemname'>{{foodsitem.name}}</view>
+          <view class='foodsitemnum'> X {{foodsitem.num}}</view>
+        </view> 
+
+       <view class='view3'>
+          <view class='viewnum'>共{{item.foodsnum}}几件商品,实付￥ <span>{{item.paymoney}}</span></view>
+          <view class="linetop" ></view>
+        </view>
+        
+      
+      
       </view>
+        
+
     </scroll-view>
-  </view>
+  
 
 </view>

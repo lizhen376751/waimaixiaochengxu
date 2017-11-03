@@ -215,7 +215,9 @@ Page({
       content: '下单成功！',
       success: function (res) {
         if (res.confirm) {
-          wx.navigateBack();
+          wx.redirectTo({
+            url: '/page/order/order'
+          })
         }
       }
     })

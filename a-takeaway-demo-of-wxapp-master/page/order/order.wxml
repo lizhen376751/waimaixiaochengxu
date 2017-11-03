@@ -1,3 +1,31 @@
-<view>
-	3
+<view class="container">
+  <view class='orderheader'>订单详情</view>
+  <scroll-view scroll-y="true" class='scroll'>
+
+    <view class='order'>
+      <view class='orderone'>
+        <view class='ordertwo'>订单号:</view>
+        <view class='orderthree'>124548454</view>
+      </view>
+
+      <view class='orderone'>
+        <view class='ordertwo'>订单时间:</view>
+        <view class='orderthree'>2017-11-03 11:26:33</view>
+      </view>
+
+      <view class='orderone'>
+        <view class='ordertwo'>支付方式:</view>
+        <view class='orderthree'>微信支付</view>
+      </view>
+
+    </view>
+
+
+<view class='header'>
+<view>图片</view>
+<view>店铺名称</view>
+</view>
+
+  </scroll-view>
+
 </view>

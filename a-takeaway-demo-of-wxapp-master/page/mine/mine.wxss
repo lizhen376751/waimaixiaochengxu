@@ -1,42 +1,105 @@
 .header {
 	background: #feb70f;
 	padding: 30rpx;
-  height: 300rpx;
+  height: 230rpx;
 }
 .header .avatar {
 	display: block;
 	margin: 0 auto;
-	width: 160rpx;
-	height: 160rpx;
+	width: 140rpx;
+	height: 140rpx;
 	border-radius: 50%;
 	border: 2px solid #fee767;
 }
 .header .nickname {
 	color: #000;
-	font-size: 22px;
+	font-size: 20px;
 	line-height: 2.4;
 	text-align: center;
 }
-.orderview {
-  margin-top: 20rpx;
-  background: white;
+.scroll{
+background: #FFFAFA;
+margin: 20rpx 0;
+height: 100%;
 }
-.orderview .scroll{
+
+
+.view1{
+  margin: 15rpx 25rpx;
   display: -webkit-flex;
+  width: 100%;
+  overflow: hidden;
 }
-.orderview .scroll .imageview{
-  margin: 0 15rpx;
-}
-.orderview .scroll .imageview .image{
+.view1 .imageview{
   position: relative;
-  border-radius: 50%;
-  width: 180rpx;
-  height: 180rpx;
 }
- .line {
-	clear: both;
-	width: 100%;
+.view1 .imageview .image{
+  border-radius: 50%;
+  width: 100rpx;
+  height: 100rpx;
+}
+.view1 .itemdec{
+  margin-left: 35rpx;
+}
+.view1 .itemdec .itemname{
+  font-size: 35rpx; 
+  margin-bottom: 10rpx;
+  color: #787878;
+}
+.view1 .itemdec .itemid{
+  font-size: 35rpx;
+  color: #787878;
+}
+.viewline{
+  position: absolute;
+  right: 0rpx;
+  clear: both;
+	width: 80%;
 	height: 1px;
-	border-bottom: 1px dashed #000;
-	padding-top: 20rpx;
+	border-bottom: 1px solid #AAAAAA;
+  margin-right: 40rpx; 
+}
+
+.view2{
+  margin:20rpx 0; 
+  float: right;
+  width: 80%;
+  display: -webkit-flex;
+  font-size: 35rpx;
+  color: #787878;
+}
+.view2 .foodsitemname{
+  width: 70%;
+  height: 40rpx;
+}
+.view2 .foodsitemnum{
+  width: 30%;
+  height: 40rpx;
+}
+.view3{
+  width: 83%;
+  height: 40rpx;
+  text-align: right;
+  clear: both;
+  color: #787878;
+  margin-bottom: 50rpx; 
+  font-size: 35rpx;
+}
+.view3 span{
+ color: #000;
+ font-size: 40rpx;
+ font-weight: 900;
+
+}
+.linetop{
+  position: absolute;
+  right: 0rpx;
+	width: 100%;
+	height: 8px;
+  background: #CCCCCC;
+  margin-right: 40rpx;
+  margin-bottom: 20rpx;
+}
+.viewnum{
+  margin-bottom: 10rpx;
 }
