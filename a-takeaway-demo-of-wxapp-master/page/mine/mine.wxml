@@ -8,9 +8,7 @@
     <scroll-view scroll-y="true" class='scroll'>
 
       <view  wx:for="{{order}}" wx:key="{{order.id}}" wx:for-index="id" id="{{order.id}}" wx:for-item="item">
-     
-      
-      <view class='view1'>
+      <view class='view1' bindtap="tapName" data-orderid="{{item.id}}">
           <view class='imageview'>
             <image class="image" src="{{item.img}}"> </image>
           </view>

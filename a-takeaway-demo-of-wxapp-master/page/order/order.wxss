@@ -3,7 +3,7 @@
   color: white;
   text-align:center;
   font-size: 45rpx;
-  /* padding-bottom: 20rpx; */
+  padding-bottom: 20rpx; 
 }
 .order{
   margin:20rpx 0; 
@@ -27,4 +27,71 @@
 .header{
   background: #FFFAFA;
   display: -webkit-flex; 
+  align-items: center; 
+ 
+}
+.header .headerone{
+  /* margin: 10rpx 20rpx; */
+  margin-right: 20rpx;
+  margin-top: 10rpx;
+  width: 13%;
+  padding-left: 20rpx;
+}
+.header .headerone .headerthree{
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+ 
+}
+.header .headertwo{
+ color: #787878;
+ font-size: 32rpx;
+ width: 600rpx;
+}
+
+.header .headerfour .headerfive{
+  padding-top:10rpx; 
+  width: 50rpx;
+  height: 50rpx;
+}
+.foods{
+  margin: 10rpx 0;
+  padding-left: 20rpx;
+  background: #E0E0E0;
+  display: -webkit-flex; 
+  align-items: center; 
+  font-size: 32rpx;
+}
+.foods .foodtwo{
+  width: 150rpx;
+}
+.foods .foodtwo .foodsone{
+  padding-top: 10rpx;
+  width: 100rpx;
+  height: 100rpx;
+}
+.foods .foodthree{
+  width: 450rpx; 
+  
+  
+}
+.foods .foodthree .foodfour{
+  color: #080808;
+  margin: 10rpx 0;
+}
+.foods .foodthree .foodfive{
+  color: #787878;
+  margin: 10rpx 0;
+}
+.foods .foodthree .foodsix{
+  color: #080808;
+}
+.foodseven{
+background: white;
+padding: 20rpx;
+text-align: right; 
+}
+.foodseven .eight{
+  color: red;
+  font-size: 35rpx;
 }

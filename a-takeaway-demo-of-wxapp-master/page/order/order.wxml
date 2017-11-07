@@ -21,10 +21,36 @@
     </view>
 
 
-<view class='header'>
-<view>图片</view>
-<view>店铺名称</view>
-</view>
+    <view class='header'>
+      <view class='headerone'>
+        <image class="headerthree" src='{{img}}'></image>
+      </view>
+      <view class='headertwo'>{{name}} ({{address}})</view>
+
+      <view class='headerfour' bindtap="tapName" data-shopid="{{shopid}}">
+        <image class="headerfive" src='/imgs/order/jiantou.png'></image>
+      </view>
+
+    </view>
+
+    <view>
+      <view class='foods' wx:for="{{foods}}" wx:key="{{foods.id}}" wx:for-index="id" id="{{foods.id}}" wx:for-item="foodsitem">
+        <view class='foodtwo'>
+          <image class='foodsone' src='{{foodsitem.img}}'></image>
+        </view>
+        <view class='foodthree'>
+          <view class='foodfour'>{{foodsitem.foodsname}}</view>
+          <view class='foodfive'>x {{foodsitem.num}}</view>
+        </view>
+        <view class='foodsix'>¥ {{foodsitem.pic}}</view>
+      </view>
+    </view>
+
+    <view class='foodseven'>
+      合计
+      <span class='eight'> ¥ {{rmb}}</span>
+    </view>
+
 
   </scroll-view>
 

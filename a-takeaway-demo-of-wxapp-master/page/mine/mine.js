@@ -68,6 +68,13 @@ Page({
 		this.setData({
 			userInfo: app.globalData.userInfo
 		});
-	}
+	},
+  tapName: function (event) {
+    var id = event.currentTarget.dataset.orderid;
+    wx.navigateTo({
+      url: '/page/order/order?id=' + id
+    })
+
+  }
 });
 

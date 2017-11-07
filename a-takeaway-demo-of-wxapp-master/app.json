@@ -1,10 +1,10 @@
 {
   "pages": [
-    "page/order/order",
     "page/index/index",
     "page/index/search",
     "page/shop/shop",
-    "page/mine/mine"
+    "page/mine/mine",
+    "page/order/order"
   
   ],
   "window": {
@@ -27,12 +27,7 @@
         "selectedIconPath": "imgs/tabBar/home_1.png",
         "text": "首页"
       },
-      {
-        "pagePath": "page/order/order",
-        "iconPath": "imgs/tabBar/mine_2.png",
-        "selectedIconPath": "imgs/tabBar/mine_1.png",
-        "text": "订单详情"
-      },
+  
       {
         "pagePath": "page/mine/mine",
         "iconPath": "imgs/tabBar/mine_2.png",
