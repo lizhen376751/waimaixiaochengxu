@@ -5,7 +5,6 @@
     "page/shop/shop",
     "page/mine/mine",
     "page/order/order"
-  
   ],
   "window": {
     "navigationBarBackgroundColor": "#feb70f",
@@ -20,7 +19,6 @@
     "borderStyle": "black",
     "backgroundColor": "#fcfcfc",
     "list": [
-     
       {
         "pagePath": "page/index/index",
         "iconPath": "imgs/tabBar/home_2.png",

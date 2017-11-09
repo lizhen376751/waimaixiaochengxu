@@ -18,7 +18,6 @@
 
     <view class="layer">
       <view class="shoplist" wx:for="{{shops}}" wx:key="id" id='{{shops.id}}' wx:for-item="item">
-
         <view class='shopsimage' bindtap="tapName" data-id="{{item.id}}">
           <image class='shopimage' src="{{item.img}}" />
         </view>

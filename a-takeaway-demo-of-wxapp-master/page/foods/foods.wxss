@@ -11,10 +11,12 @@ page {
 	position: relative;
 	background: #feb70f;
 	padding: 20rpx 40rpx;
-	color: #f45044;
+	color: #000;
+	-webkit-transition: all 0.6s ease-in-out;
 }
 .header.hidden {
-	margin-top: -390rpx;
+	/*-webkit-transform: translate3d(0,-290rpx,0);*/
+	margin-top: -290rpx;
 }
 .header .logo {
 	float: left;
@@ -35,7 +37,16 @@ page {
 	width: 360rpx;
 	line-height: 70rpx;
 }
-
+.header .follow {
+	position: absolute;
+	right: 20px;
+	top: 50px;
+	font-size: 30rpx;
+	line-height: 2;
+	padding: 0 0.7em;
+	border: 1rpx solid;
+	border-radius: 30rpx;
+}
 .header .line {
 	clear: both;
 	width: 100%;
@@ -57,7 +68,7 @@ page {
 	padding-bottom: 100rpx;
 }
 .classify-container {
-	width: 150rpx;
+	width: 180rpx;
 	background: #efefef;
 	height: 100%;
 }
@@ -74,16 +85,18 @@ page {
 	font-size: 30rpx;
 	color: #646464;
 	line-height: 1.2;
+	text-align: left;
+	pointer-events: none;
 }
 
 .goods-container {
-  -webkit-flex: 1;
+	-webkit-flex: 1;
 	background: #ffffff;
 	height: 100%;
 }
 .goods-container .title {
-	 padding: 20rpx 25rpx; 
-	 color: #646464; 
+	padding: 20rpx 25rpx;
+	color: #646464;
 	font-size: 30rpx;
 	line-height: 30rpx;
 	background: #f7f7f7;
@@ -104,18 +117,22 @@ page {
 .goods-container .goods .name {
 	color: #000;
 	font-size: 36rpx;
-	line-height: 55rpx;
+	line-height: 46rpx;
 }
-
+.goods-container .goods .sold {
+	color: #989898;
+	font-size: 30rpx;
+	line-height: 46rpx;
+}
 .goods-container .goods .price {
 	color: #f45044;
 	font-size: 36rpx;
-	line-height: 55rpx;
+	line-height: 46rpx;
 }
 .goods-container .goods .addCart {
 	position: absolute;
-	right: 40rpx;
-	bottom: 35rpx;
+	right: 30rpx;
+	bottom: 30rpx;
 	width: 64rpx;
 	height: 64rpx;
 	background: #feb70f;
@@ -186,8 +203,8 @@ page {
 	background: #fff;
 }
 .cart .data {
-    -webkit-flex: 1;
-    /*border-top: 1rpx solid #e7e7e7;*/
+	-webkit-flex: 1;
+	/*border-top: 1rpx solid #e7e7e7;*/
 }
 .cart .data .icon {
 	position: absolute;
@@ -228,12 +245,4 @@ page {
 	width: 200rpx;
 	height: 100%;
 	font-size: 36rpx;
-}
-.classify-container .classify .name {
-	display: inline-block;
-	font-size: 30rpx;
-	color: #646464;
-	line-height: 1.2;
-	text-align: left;
-	pointer-events: none;
 }
