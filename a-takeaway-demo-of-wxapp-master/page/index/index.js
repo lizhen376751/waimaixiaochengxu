@@ -25,12 +25,40 @@ Page({
 				name: '金牌好店'
 			}
 		],
-		shops: app.globalData.shops
+		shops: [],
+    pageNo:1,
+    bottomname:'努力加载中…',
+    toptrue :1
 	},
 	onLoad: function () {
 		var self = this;
+    //进入页面后请求数据
+    wx.request({
+      url: 'http://lizhen.free.ngrok.cc/app.ZMTManage/index.jsp', 
+      data :{
+        m:'smallapporder',
+        c:'SmallAppOrder',
+        a:'queryAllSeeler',
+        pageNo: self.data.pageNo
+      },
+      method: 'GET',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log(res.data)
+        self.setData({
+          shops: res.data
+        })
+      },
+      complete :function(res){
+        console.log("网络请求信息为",res)
+      }
+
+    })
     wx.getSystemInfo({
       success: function (res) {
+        console.log("获取到相应的高度", res);
         self.setData({
           windowHeight: res.windowHeight,
           windowWidth: res.windowWidth
@@ -42,21 +70,22 @@ Page({
 			success: function (res) {
 				var latitude = res.latitude;
 				var longitude = res.longitude;
-				server.getJSON('/waimai/api/location.php', {
-					latitude: latitude,
-					longitude: longitude
-				}, function (res) {
-					console.log(res)
-					if (res.data.status != -1) {
-						self.setData({
-							address: res.data.result.address_component.street_number
-						});
-					} else {
-						self.setData({
-							address: '定位失败'
-						});
-					}
-				});
+        //获取地理位置的请求(暂时无用)
+				// server.getJSON('/waimai/api/location.php', {
+				// 	latitude: latitude,
+				// 	longitude: longitude
+				// }, function (res) {
+				// 	console.log(res)
+				// 	if (res.data.status != -1) {
+				// 		self.setData({
+				// 			address: res.data.result.address_component.street_number
+				// 		});
+				// 	} else {
+				// 		self.setData({
+				// 			address: '定位失败'
+				// 		});
+				// 	}
+				// });
 			}
 		})
 	},
@@ -76,15 +105,7 @@ Page({
 	tapSearch: function () {
 		wx.navigateTo({url: 'search'});
 	},
-	toNearby: function () {
-		var self = this;
-		self.setData({
-			scrollIntoView: 'nearby'
-		});
-		self.setData({
-			scrollIntoView: null
-		});
-	},
+
 	tapFilter: function (e) {
 		switch (e.target.dataset.id) {
 			case '1':
@@ -111,7 +132,6 @@ Page({
 	
   tapName : function(e){
     console.log(e);
-    var name = this.data.shops[e.currentTarget.dataset.id-1].name;
     var id = e.currentTarget.dataset.id;
     wx.navigateTo({
       url: '/page/shop/shop?id=' + id
@@ -120,13 +140,50 @@ Page({
   toprequest :function(e){
     var that = this;
     var shopmsg = that.data.shops;
-    for (var i = 0; i < app.globalData.shops1.length; i++) {
-      shopmsg.push(app.globalData.shops1[i]);
-    }
-    that.setData({
-      shops: shopmsg,
-      isshow: false,
-    });
+    if (that.data.toptrue==1){
+      that.setData({
+        toptrue :2
+      });
+    wx.request({
+      url: 'http://lizhen.free.ngrok.cc/app.ZMTManage/index.jsp',
+      data: {
+        m: 'smallapporder',
+        c: 'SmallAppOrder',
+        a: 'queryAllSeeler',
+        pageNo: that.data.pageNo+1
+      },
+      method: 'GET',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        console.log(res.data)
+        if (res.data.length>0){
+          for (var i = 0; i < res.data.length; i++) {
+            var shop = res.data[i];
+            shopmsg.push(shop);
+          }
+          that.setData({
+            shops: shopmsg,
+            pageNo: that.data.pageNo + 1,
+            isshow: false,
+            toptrue: 1
+          });
+        }else{
+          that.setData({
+            bottomname :'更多窗口接入中,敬请期待...',
+            isshow: false,
+            toptrue: 1
+          })
+        }
+        
+      },
+      complete: function (res) {
+        console.log("网络请求信息为", res)
+      }
+    })
+   
+  }
   }
 });
 

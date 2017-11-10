@@ -2,73 +2,7 @@ var app = getApp();
 var server = require('../../utils/server');
 Page({
 	data: {
-    goods: [
-      {
-        id: 1,
-        name: '娃娃菜',
-        pic: 'http://wxapp.im20.com.cn/impublic/waimai/imgs/goods/1.jpg',
-        sold: 1014,
-        price: 2
-      },
-      {
-        id: 2,
-        name: '金针菇',
-        pic: 'http://wxapp.im20.com.cn/impublic/waimai/imgs/goods/2.jpg',
-        sold: 1029,
-        price: 3
-      },
-      {
-        id: 3,
-        name: '方便面',
-        pic: 'http://wxapp.im20.com.cn/impublic/waimai/imgs/goods/2.jpg',
-        sold: 1030,
-        price: 2
-      },
-       {
-        id: 4,
-        name: '粉丝',
-        pic: 'http://wxapp.im20.com.cn/impublic/waimai/imgs/goods/2.jpg',
-        sold: 1059,
-        price: 1
-      },
-       {
-        id: 5,
-        name: '生菜',
-        pic: 'http://wxapp.im20.com.cn/impublic/waimai/imgs/goods/2.jpg',
-        sold: 1029,
-        price: 2
-      },
-      {
-        id: 6,
-        name: '白菜',
-        pic: 'http://wxapp.im20.com.cn/impublic/waimai/imgs/goods/1.jpg',
-        sold: 1064,
-        price: 2
-      },
-     {
-        id: 7,
-        name: '杏鲍菇',
-        pic: 'http://wxapp.im20.com.cn/impublic/waimai/imgs/goods/2.jpg',
-        sold: 814,
-        price: 3
-      },
-       {
-        id: 8,
-        name: '香菇',
-        pic: 'http://wxapp.im20.com.cn/impublic/waimai/imgs/goods/1.jpg',
-        sold: 124,
-        price: 3
-      },
-     {
-        id: 9,
-        name: '猴头菇',
-        pic: 'http://wxapp.im20.com.cn/impublic/waimai/imgs/goods/1.jpg',
-        sold: 102,
-        price: 5
-        }
-     ],
-
-
+    goods: [],
     //声明了一个对象,对象的标准是类似于map的形式,一个key对应一个value
 		goods1: {
 			1: {
@@ -170,11 +104,53 @@ Page({
 			list: {}  //选择的食物的id 以及数量
 		},
     newlist:{},
-		showCartDetail: false
+		showCartDetail: false,
+    pageNo : 1
 	},
 	onLoad: function (options) {
+    var that = this;
     console.log(app);
 		var shopId = options.id;
+    wx.request({
+      url: app.globalData.url,
+      data: {
+        m: 'smallapporder',
+        c: 'SmallAppOrder',
+        a: 'querySeelerById',
+        id: shopId
+      },
+      method: 'GET',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success: function (res) {
+        that.setData({
+          shop: res.data
+        })
+      },
+      complete: function (res) {
+        console.log("网络请求信息为", res)
+      }
+    })
+    wx.request({
+      url: app.globalData.url,
+      data :{
+        m: 'smallapporder',
+        c: 'SmallAppOrder',
+        a: 'queryFoodsBySeelerId',
+        id: shopId,
+        pageNo :that.data.pageNo
+      },
+      success :function(res){
+        that.setData({
+          goods: res.data
+        })
+      },
+      complete : function(res){
+        console.log("请求窗口食物", res)
+      }
+    })
+
 		for (var i = 0; i < app.globalData.shops.length; ++i) {
 			if (app.globalData.shops[i].id == shopId) {
 				this.setData({
@@ -193,14 +169,15 @@ Page({
   //点击食物的加号
 	tapAddCart: function (e) {
     //传入食物id,调用添加方法
-		this.addCart(e.target.dataset.id);
+    this.addCart(e.target.dataset.id, e.target.dataset.RowNumber);
 	},
   //减去一种食物
 	tapReduceCart: function (e) {
 		this.reduceCart(e.target.dataset.id);
 	},
   //添加到购物车的方法
-	addCart: function (id) {
+  addCart: function (id,RowNumber) {
+    RowNumber = RowNumber-1;
     //如果这种食物的id,赋值给num,如果没有就是0
 		var num = this.data.cart.list[id] || 0;
     //食物的数量加1
@@ -226,8 +203,9 @@ Page({
 		for (var id in this.data.cart.list) {
       //取出所有选中的食物进行循环,然后累计总的数量以及金额
 			var goods = this.data.goods[id];
+      //TODO 通过食物id查找食物的金额
 			count += this.data.cart.list[id];
-			total += goods.price * this.data.cart.list[id];
+      total += goods.je * this.data.cart.list[id];
 		}
 		this.data.cart.count = count; 
 		this.data.cart.total = total;

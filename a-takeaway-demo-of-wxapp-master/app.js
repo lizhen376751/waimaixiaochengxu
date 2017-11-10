@@ -29,6 +29,7 @@ App({
 		console.log('App Hide')
 	},
 	globalData: {
+    url:'http://lizhen.free.ngrok.cc/app.ZMTManage/index.jsp',
 		hasLogin: false,
 		shops: [
 			{
@@ -101,8 +102,9 @@ App({
 		var self = this;
 		wx.login({
 			success: function (res) {
-        console.log(pp + "登录了..." + res);
+        console.log("李振测试", res);
 				console.log('wx.login', res)
+        //res.code获取code,继而获取相关的信息,openid什么的...
         self.getUserInfo();
 				// server.getJSON('/WxAppApi/setUserSessionKey', {code: res.code}, function (res) {
 				// 	console.log('setUserSessionKey', res)
