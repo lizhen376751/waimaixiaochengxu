@@ -29,7 +29,7 @@ App({
 		console.log('App Hide')
 	},
 	globalData: {
-    url:'http://ustbwx.bilein.com/app.ZMTManage/index.jsp',
+    url:'http://lizhen.ngrok.xiaomiqiu.cn/app.ZMTManage/index.jsp',
 		hasLogin: false,
 		shops: [
 			{
@@ -103,16 +103,9 @@ App({
 		wx.login({
 			success: function (res) {
         console.log("李振测试", res);
-				console.log('wx.login', res)
+				console.log('wx.login', res);
         //res.code获取code,继而获取相关的信息,openid什么的...
         self.getUserInfo();
-				// server.getJSON('/WxAppApi/setUserSessionKey', {code: res.code}, function (res) {
-				// 	console.log('setUserSessionKey', res)
-				// 	self.rd_session = res.data.data.rd_session;
-				// 	self.globalData.hasLogin = true;
-				// 	wx.setStorageSync('rd_session', self.rd_session);
-				
-				// });
 			}
 		});
 	},
@@ -122,8 +115,9 @@ App({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
           wx.getUserInfo({
+            withCredentials: true,
             success: function (res) {
-              console.log('getUserInfo=', res)
+              console.log('获取用户信息', res)
               self.globalData.userInfo = res.userInfo;
             }
           });

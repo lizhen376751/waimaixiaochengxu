@@ -65,29 +65,6 @@ Page({
         })  
       }
     })
-		wx.getLocation({
-			type: 'gcj02',
-			success: function (res) {
-				var latitude = res.latitude;
-				var longitude = res.longitude;
-        //获取地理位置的请求(暂时无用)
-				// server.getJSON('/waimai/api/location.php', {
-				// 	latitude: latitude,
-				// 	longitude: longitude
-				// }, function (res) {
-				// 	console.log(res)
-				// 	if (res.data.status != -1) {
-				// 		self.setData({
-				// 			address: res.data.result.address_component.street_number
-				// 		});
-				// 	} else {
-				// 		self.setData({
-				// 			address: '定位失败'
-				// 		});
-				// 	}
-				// });
-			}
-		})
 	},
 	onShow: function () {
 	},

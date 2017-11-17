@@ -8,7 +8,7 @@ Page({
 		cart: {
       count: 0, //总共的数量
 			total: 0, //总共的价格
-			list: []  //选择的食物的id 以及数量
+			list: {}  //选择的食物的id 以及数量
 		},
     newlist:{},
 		showCartDetail: false,
@@ -76,10 +76,10 @@ Page({
   addCart: function (id,RowNumber) {
     var that = this;
     //如果这种食物的id,赋值给num,如果没有就是0
-    var food = this.data.cart.list[RowNumber];
+    var food = this.data.cart.list[id];
     if (food != null) {
       food.num += 1;
-      that.data.cart.list[RowNumber] = food;
+      that.data.cart.list[id] = food;
       that.countCart(id);
     }else{
       wx.request({
@@ -93,7 +93,7 @@ Page({
         success: function (res) {
          food = res.data;
          food.num = 1;
-         that.data.cart.list.push(food);
+         that.data.cart.list[id]=food;
          that.countCart(id);
         },
         complete: function (res) {
@@ -106,12 +106,12 @@ Page({
 	},
   //减去一种食物
   reduceCart: function (id, RowNumber) {
-    var food = this.data.cart.list[RowNumber];
+    var food = this.data.cart.list[id];
     if (food.num <= 1) {
-      this.data.cart.list.splice(RowNumber,1);
-      // delete this.data.cart.list[RowNumber];
+      // this.data.cart.list.splice(RowNumber,1);
+      delete this.data.cart.list[id];
 		} else {
-      this.data.cart.list[RowNumber].num = this.data.cart.list[RowNumber].num - 1;
+      this.data.cart.list[id].num = this.data.cart.list[id].num - 1;
 		}
     this.subtraction(id);
 	},
@@ -238,24 +238,25 @@ Page({
     wx.request({
       url: app.globalData.url,
       data :{
-        w:"",
-        c:"",
-        a:"",
-
+        m:"smallapporder",
+        c:"SmallAppOrder",
+        a:"placeOrder",
+        foods: foods,
+        shop: shop
       }
     })
-    wx.showModal({
-      showCancel: false,
-      title: '恭喜',
-      content: '下单成功！',
-      success: function (res) {
-        if (res.confirm) {
-          wx.redirectTo({
-            url: '/page/order/order'
-          })
-        }
-      }
-    })
+    // wx.showModal({
+    //   showCancel: false,
+    //   title: '恭喜',
+    //   content: '下单成功！',
+    //   success: function (res) {
+    //     if (res.confirm) {
+    //       wx.redirectTo({
+    //         url: '/page/order/order'
+    //       })
+    //     }
+    //   }
+    // })
 	}
 });
 
