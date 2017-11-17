@@ -54,11 +54,11 @@
     <view class="mask" bindtap="hideCartDetail"></view>
     <view class="list">
       <view class="item" wx:for="{{cart.list}}" wx:for-index="id" wx:for-item="num" wx:key="id">
-        <view class="name ellipsis">{{goods[RowNumber].foodname}}</view>
-        <view class="total">￥{{goods[RowNumber].je*cart.list[id]}}</view>
-        <view class="reduce" data-id="{{id}}" bindtap="tapReduceCart">-</view>
-        <view class="num">{{num}}</view>
-        <view class="add" data-id="{{id}}" bindtap="tapAddCart">+</view>
+        <view class="name ellipsis">{{num.FoodName}}</view>
+        <view class="total">￥{{num.je*num.num}}</view>
+        <view class="reduce" data-id="{{id}}" data-foodid="{{num.ID}}" bindtap="tapReduceCart">-</view>
+        <view class="num">{{num.num}}</view>
+        <view class="add" data-id="{{id}}" data-foodid="{{num.ID}}" bindtap="tapAddfood">+</view>
       </view>
     </view>
   </view>

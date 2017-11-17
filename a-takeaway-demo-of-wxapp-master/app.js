@@ -29,7 +29,7 @@ App({
 		console.log('App Hide')
 	},
 	globalData: {
-    url:'http://lizhen.free.ngrok.cc/app.ZMTManage/index.jsp',
+    url:'http://ustbwx.bilein.com/app.ZMTManage/index.jsp',
 		hasLogin: false,
 		shops: [
 			{

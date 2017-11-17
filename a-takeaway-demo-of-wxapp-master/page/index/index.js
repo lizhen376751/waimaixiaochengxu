@@ -34,7 +34,7 @@ Page({
 		var self = this;
     //进入页面后请求数据
     wx.request({
-      url: 'http://lizhen.free.ngrok.cc/app.ZMTManage/index.jsp', 
+      url: app.globalData.url, 
       data :{
         m:'smallapporder',
         c:'SmallAppOrder',
@@ -145,7 +145,7 @@ Page({
         toptrue :2
       });
     wx.request({
-      url: 'http://lizhen.free.ngrok.cc/app.ZMTManage/index.jsp',
+      url: app.globalData.url,
       data: {
         m: 'smallapporder',
         c: 'SmallAppOrder',

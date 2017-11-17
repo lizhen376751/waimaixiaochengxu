@@ -1,4 +1,4 @@
-<view class="container">
+  <view class="container">
   <view class="header {{scrollDown?'scrolled':''}}">
     <view class="search" bindtap="tapSearch">
       <image class="icon" src="/imgs/index/icon_search.png" />
