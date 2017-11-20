@@ -75,7 +75,7 @@
     <form bindsubmit="submit" report-submit="true">
       <!--<view formType="submit" class="submit">去结算</view> -->
 
-      <button class="yellow {{cart.count?'':'disabled'}}" formType="submit" disabled="{{!cart.count}}">去结算</button>
+      <button class="yellow {{cart.count?'':'disabled'}}" formType="submit"   disabled="{{!cart.count}}">去结算</button>
           
    
     </form>

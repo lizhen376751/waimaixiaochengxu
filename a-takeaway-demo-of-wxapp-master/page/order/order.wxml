@@ -5,12 +5,12 @@
     <view class='order'>
       <view class='orderone'>
         <view class='ordertwo'>订单号:</view>
-        <view class='orderthree'>124548454</view>
+        <view class='orderthree'>{{restaurantorders}}</view>
       </view>
 
       <view class='orderone'>
         <view class='ordertwo'>订单时间:</view>
-        <view class='orderthree'>2017-11-03 11:26:33</view>
+        <view class='orderthree'>{{ordertime}}</view>
       </view>
 
       <view class='orderone'>
@@ -25,9 +25,9 @@
       <view class='headerone'>
         <image class="headerthree" src='{{img}}'></image>
       </view>
-      <view class='headertwo'>{{name}} ({{address}})</view>
+      <view class='headertwo'>{{SellerName}} ({{SellerSite}})</view>
 
-      <view class='headerfour' bindtap="tapName" data-shopid="{{shopid}}">
+      <view class='headerfour' bindtap="tapName" data-shopid="{{SellerID}}">
         <image class="headerfive" src='/imgs/order/jiantou.png'></image>
       </view>
 
@@ -36,19 +36,20 @@
     <view>
       <view class='foods' wx:for="{{foods}}" wx:key="{{foods.id}}" wx:for-index="id" id="{{foods.id}}" wx:for-item="foodsitem">
         <view class='foodtwo'>
-          <image class='foodsone' src='{{foodsitem.img}}'></image>
+          <!-- <image class='foodsone' src='{{foodsitem.img}}'></image> -->
+          <image class='foodsone' src='http://wxapp.im20.com.cn/impublic/waimai/imgs/goods/2.jpg'></image>
         </view>
         <view class='foodthree'>
-          <view class='foodfour'>{{foodsitem.foodsname}}</view>
-          <view class='foodfive'>x {{foodsitem.num}}</view>
+          <view class='foodfour'>{{foodsitem.FoodName}}</view>
+          <view class='foodfive'>x {{foodsitem.sellerfoodnum}}</view>
         </view>
-        <view class='foodsix'>¥ {{foodsitem.pic}}</view>
+        <view class='foodsix'>¥ {{foodsitem.sellerfoodprice}}</view>
       </view>
     </view>
 
     <view class='foodseven'>
       合计
-      <span class='eight'> ¥ {{rmb}}</span>
+      <span class='eight'> ¥ {{ordermount}}</span>
     </view>
 
 

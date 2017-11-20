@@ -62,7 +62,15 @@ Page({
     ]
   },
   onLoad: function (option) {
-    console.log("测试回话......."+option.query);
+   wx.request({
+     url: app.globalData.url,
+     data:{
+       m: 'smallapporder',
+       c: 'SmallAppOrder',
+       a: 'queryDetailsByOrder',
+       openid:''
+     }
+   })
 	},
 	onShow: function () {
 		this.setData({
