@@ -33,10 +33,10 @@ Page({
       },
       success : function(res){
         that.setData({
-          SellerID: res.data.SellerID,
-          SellerName: res.data.SellerName,
+          SellerID: res.data.sellerID,
+          SellerName: res.data.sellerName,
           ordermount: res.data.ordermount,
-          SellerSite: res.data.SellerSite,
+          SellerSite: res.data.sellerSite,
           ordertime: res.data.ordertime,
           restaurantorders: res.data.restaurantorders,
          

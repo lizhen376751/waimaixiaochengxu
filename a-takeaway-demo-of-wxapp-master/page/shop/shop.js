@@ -243,6 +243,8 @@ Page({
         a: "placeOrder",
         foods: foods,
         shop: shop,
+        openid:'oUpF8uMuAJO_M2pxb1Q9zNjWeS6o',
+        nickName:'李振'
 
       },
       success: function (res) {
