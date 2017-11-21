@@ -36,7 +36,7 @@
     <view>
       <view class='foods' wx:for="{{foods}}" wx:key="{{foods.id}}" wx:for-index="id" id="{{foods.id}}" wx:for-item="foodsitem">
         <view class='foodtwo'>
-          <!-- <image class='foodsone' src='{{foodsitem.foodImg}}'></image> -->
+          <!-- <image class='foodsone' src='{{foodsitem.attachFileName}}'></image> -->
           <image class='foodsone' src='http://wxapp.im20.com.cn/impublic/waimai/imgs/goods/2.jpg'></image>
         </view>
         <view class='foodthree'>
