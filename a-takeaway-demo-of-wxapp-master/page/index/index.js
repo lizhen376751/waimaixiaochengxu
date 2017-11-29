@@ -58,7 +58,6 @@ Page({
     })
     wx.getSystemInfo({
       success: function (res) {
-        console.log("获取到相应的高度", res);
         self.setData({
           windowHeight: res.windowHeight,
           windowWidth: res.windowWidth

@@ -11,7 +11,7 @@
     "navigationBarTextStyle": "white",
     "backgroundColor": "#efefef",
     "backgroundTextStyle": "dark",
-    "navigationBarTitleText": "高校订餐"
+    "navigationBarTitleText": "高校订餐系统"
   },
   "tabBar": {
     "color": "#878787",

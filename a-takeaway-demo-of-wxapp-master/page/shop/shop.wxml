@@ -12,15 +12,8 @@
 
 
   <view class="content-container">
-    <!-- <scroll-view class="classify-container" scroll-y="true">
-      <view class="classify {{classifySeleted==classify.id?'active':''}}" wx:for="{{goodsList}}" wx:for-item="classify" wx:key="id" data-id="{{classify.id}}" bindtap="tapClassify">
-        <view class="name">{{classify.classifyName}}</view>
-      </view>
-    </scroll-view> -->
-
-
- <scroll-view class="goods-container" scroll-y="true" scroll-into-view="{{classifyViewed}}" bindscroll="onGoodsScroll">
-      <view class="goods" wx:for="{{goods}}"  wx:key="id"  wx:for-item="itemName">
+    <scroll-view class="goods-container" scroll-y="true" scroll-into-view="{{classifyViewed}}" bindscroll="onGoodsScroll" bindscrolltolower = "bindtop">
+      <view class="goods" wx:for="{{goods}}" wx:key="id" wx:for-item="itemName">
         <!-- <image class="pic" src="{{itemName.pic}}"></image> -->
         <image class="pic" src="http://wxapp.im20.com.cn/impublic/waimai/imgs/goods/1.jpg"></image>
         <view class="name ellipsis">{{itemName.foodname}}</view>
@@ -29,23 +22,7 @@
           <image src="/imgs/shop/plus.png"></image>
         </view>
       </view>
-    </scroll-view> 
-
-<!-- 
-    		<scroll-view class="goods-container" scroll-y="true" scroll-into-view="{{classifyViewed}}" bindscroll="onGoodsScroll">
-			<view wx:for="{{goodsList}}" wx:for-item="classify" wx:key="id" id="{{classify.id}}">
-				<view class="title">{{classify.classifyName}}</view>
-				<view class="goods" wx:for="{{classify.goods}}" wx:for-item="id" wx:key="*this">
-					<image class="pic" src="{{goods[id].pic}}"></image>
-					<view class="name ellipsis">{{goods[id].name}}</view>
-					<view class="price">￥{{goods[id].price}}</view>
-					<view class="addCart" bindtap="tapAddCart" data-id="{{id}}">
-						<image src="/imgs/shop/plus.png"></image>
-					</view>
-				</view>
-			</view>
-		</scroll-view> -->
-
+    </scroll-view>
   </view>
 
 
@@ -55,7 +32,7 @@
     <view class="list">
       <view class="item" wx:for="{{cart.list}}" wx:for-index="id" wx:for-item="num" wx:key="id">
         <view class="name ellipsis">{{num.FoodName}}</view>
-        <view class="total">￥{{num.je*num.num}}</view>
+        <view class="total">￥{{num.je*100*num.num/100}}</view>
         <view class="reduce" data-id="{{id}}" data-foodid="{{num.ID}}" bindtap="tapReduceCart">-</view>
         <view class="num">{{num.num}}</view>
         <view class="add" data-id="{{id}}" data-foodid="{{num.ID}}" bindtap="tapAddfood">+</view>
@@ -73,11 +50,7 @@
       <view class="total">￥{{cart.total}}</view>
     </view>
     <form bindsubmit="submit" report-submit="true">
-      <!--<view formType="submit" class="submit">去结算</view> -->
-
-      <button class="yellow {{cart.count?'':'disabled'}}" formType="submit"   disabled="{{!cart.count}}">去结算</button>
-          
-   
+      <button class="yellow {{cart.count?'':'disabled'}}" formType="submit" disabled="{{!cart.count}}">去结算</button>
     </form>
   </view>
 </view>

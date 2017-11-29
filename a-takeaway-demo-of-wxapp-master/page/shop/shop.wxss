@@ -159,7 +159,7 @@ page {
 	-webkit-flex: 1;
 }
 .cart-detail .list .item .total {
-	width: 150rpx;
+	width: 160rpx;
 }
 .cart-detail .list .item .reduce,
 .cart-detail .list .item .add {

@@ -3,8 +3,6 @@ var server = require('../../utils/server');
 Page({
   data: {
     goods: [],
-    //声明了一个对象,对象的标准是类似于map的形式,一个key对应一个value
-    // 加入购物车的食物
     cart: {
       count: 0, //总共的数量
       total: 0, //总共的价格
@@ -12,18 +10,22 @@ Page({
     },
     newlist: {},
     showCartDetail: false,
-    pageNo: 1
+    pageNo: 1,
+    shopId:null,
+    topdown:true,
   },
   onLoad: function (options) {
     var that = this;
-    var shopId = options.id;
+    that.setData({
+      shopId : options.id
+    })
     wx.request({
       url: app.globalData.url,
       data: {
         m: 'smallapporder',
         c: 'SmallAppOrder',
         a: 'querySeelerById',
-        id: shopId
+        id: that.data.shopId
       },
       method: 'GET',
       header: {
@@ -38,23 +40,40 @@ Page({
         console.log("根据id请求窗口信息", res)
       }
     })
+    that.requestFoodsBySeelerId(that.data.shopId, 1);
+    
+  },
+  //根据店铺id查询食物列表
+  requestFoodsBySeelerId: function (id,pageNo){
+    var that = this;
     wx.request({
       url: app.globalData.url,
       data: {
         m: 'smallapporder',
         c: 'SmallAppOrder',
         a: 'queryFoodsBySeelerId',
-        id: shopId,
-        pageNo: that.data.pageNo
+        id: id,
+        pageNo: pageNo
       },
       success: function (res) {
+        var goods1 = that.data.goods;
+        var goods2 = res.data;
+        if (goods1.length>0){
+          if (goods2.length > 0) {
+            for (var i = 0; i < goods2.length; i++) {
+              var good = goods2[i];
+              goods1.push(good);
+            }
+        }
+        }else{
+          goods1 = goods2;
+        }
         that.setData({
-          goods: res.data
+          goods: goods1,
+          topdown : true,
         })
       },
-      complete: function (res) {
-        console.log("请求窗口食物", res)
-      }
+
     })
   },
   onShow: function () { },
@@ -190,21 +209,28 @@ Page({
       });
     }
 
-    var scale = e.detail.scrollWidth / 570,
-      scrollTop = e.detail.scrollTop / scale,
-      h = 0,
-      classifySeleted,
-      len = this.data.goodsList.length;
-    this.data.goodsList.forEach(function (classify, i) {
-      var _h = 70 + classify.goods.length * (46 * 3 + 20 * 2);
-      if (scrollTop >= h - 100 / scale) {
-        classifySeleted = classify.id;
-      }
-      h += _h;
-    });
-    this.setData({
-      classifySeleted: classifySeleted
-    });
+    // var scale = e.detail.scrollWidth / 570,
+    //   scrollTop = e.detail.scrollTop / scale,
+    //   h = 0,
+    //   classifySeleted,
+    //   len = this.data.goodsList.length;
+    // this.data.goodsList.forEach(function (classify, i) {
+    //   var _h = 70 + classify.goods.length * (46 * 3 + 20 * 2);
+    //   if (scrollTop >= h - 100 / scale) {
+    //     classifySeleted = classify.id;
+    //   }
+    //   h += _h;
+    // });
+  },
+  bindtop :function(){
+    if(this.data.topdown=true){
+      this.setData({
+        topdown : false,
+        pageNo : this.data.pageNo + 1
+      })
+     
+      this.requestFoodsBySeelerId(this.data.shopId, this.data.pageNo);
+    }
   },
   //点击分类之后,跳转到相应的食物列表
   tapClassify: function (e) {
