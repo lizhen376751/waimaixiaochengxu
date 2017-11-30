@@ -22,9 +22,10 @@
           <image src="/imgs/shop/plus.png"></image>
         </view>
       </view>
+      <view hidden='{{isshow}}' class="loading">{{bottomname}}</view>
     </scroll-view>
   </view>
-
+ 
 
 
   <view class="cart-detail" hidden="{{!showCartDetail||!cart.count}}">

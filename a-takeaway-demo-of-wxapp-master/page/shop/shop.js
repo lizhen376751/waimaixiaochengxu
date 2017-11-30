@@ -13,6 +13,8 @@ Page({
     pageNo: 1,
     shopId:null,
     topdown:true,
+    isshow:true,
+    bottomname:"数据加载中...",
   },
   onLoad: function (options) {
     var that = this;
@@ -64,6 +66,10 @@ Page({
               var good = goods2[i];
               goods1.push(good);
             }
+        }else{
+            that.setData({
+              bottomname: "到底了...",
+            })
         }
         }else{
           goods1 = goods2;
@@ -226,7 +232,8 @@ Page({
     if(this.data.topdown=true){
       this.setData({
         topdown : false,
-        pageNo : this.data.pageNo + 1
+        pageNo : this.data.pageNo + 1,
+        isshow:false,
       })
      
       this.requestFoodsBySeelerId(this.data.shopId, this.data.pageNo);

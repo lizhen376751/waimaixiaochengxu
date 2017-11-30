@@ -5,37 +5,38 @@
   </view>
 
 
-    <scroll-view scroll-y="true" style="height: {{windowHeight}}px; width: {{windowWidth}}px;" class='scroll' bindscrolltolower='scroll'>
+  <scroll-view scroll-y="true" style="height: {{windowHeight}}px; width: {{windowWidth}}px;" class='scroll' bindscrolltolower='scroll'>
 
-      <view  wx:for="{{order}}" wx:key="{{order.id}}" wx:for-index="id" id="{{order.id}}" wx:for-item="item">
+    <view class="order-item" wx:for="{{order}}" wx:key="{{order.id}}" wx:for-index="id" id="{{order.id}}" wx:for-item="item">
       <view class='view1' bindtap="tapName" data-orderid="{{item.restaurantorders}}">
-          <view class='imageview'>
-            <!-- <image class="image" src="{{item.img}}"> </image> -->
-              <image class="image" src="http://uploadimg.globrand.com/UploadFiles/Ware/201707/20170703_180650284.jpg"></image> 
-          </view>
-          <view class='itemdec'>
-            <view class='itemname'>{{item.sellerName}} ({{item.sellerSite}})</view>
-            <view class='itemid'>订单编号 : {{item.restaurantorders}}</view>
-          </view>
+        <view class='imageview'>
+          <!-- <image class="image" src="{{item.img}}"> </image> -->
+          <image class="image" src="http://uploadimg.globrand.com/UploadFiles/Ware/201707/20170703_180650284.jpg"></image>
         </view>
-        <view class="viewline" ></view>
-
-        <view class='view2' wx:for="{{item.foods}}" wx:key="{{item.foods.id}}" wx:for-index="id" id="{{item.foods.id}}" wx:for-item="foodsitem">
-          <view class='foodsitemname'>{{foodsitem.foodName}}</view>
-          <view class='foodsitemnum'> X {{foodsitem.sellerfoodnum}}</view>
-        </view> 
-
-       <view class='view3'>
-          <view class='viewnum'>共{{item.foodsnum}}几件商品,实付￥ <span>{{item.ordermount}}</span></view>
-          <view class="linetop" ></view>
+        <view class='itemdec'>
+          <view class='itemname'>{{item.sellerName}} ({{item.sellerSite}})</view>
+          <view class='itemid'>订单编号 : {{item.restaurantorders}}</view>
         </view>
-        
-      
-      
       </view>
-        
+      <view class="viewline"></view>
 
-    </scroll-view>
-  
+      <view class='view2' wx:for="{{item.foods}}" wx:key="{{item.foods.id}}" wx:for-index="id" id="{{item.foods.id}}" wx:for-item="foodsitem">
+        <view class='foodsitemname'>{{foodsitem.foodName}}</view>
+        <view class='foodsitemnum'> X {{foodsitem.sellerfoodnum}}</view>
+      </view>
+
+      <view class='view3'>
+        <view class='viewnum'>共{{item.foodsnum}}几件商品,实付￥
+          <span>{{item.ordermount}}</span>
+        </view>
+      </view>
+
+
+
+    </view>
+
+
+  </scroll-view>
+
 
 </view>

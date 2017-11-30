@@ -78,8 +78,10 @@ page {
 
 .goods-container {
   -webkit-flex: 1;
-	background: #ffffff;
 	height: 100%;
+}
+.goods{
+  	background: #ffffff;
 }
 .goods-container .title {
 	 padding: 20rpx 25rpx; 
@@ -236,4 +238,14 @@ page {
 	line-height: 1.2;
 	text-align: left;
 	pointer-events: none;
+}
+
+.loading {
+	font-size: 32rpx;
+	text-align: center;
+	line-height: 2;
+	margin: 10rpx 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
