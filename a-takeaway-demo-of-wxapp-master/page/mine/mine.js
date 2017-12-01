@@ -5,7 +5,9 @@ Page({
     order :[],
     pageNo:1,
     dropDown:true,
-    openid:'oUpF8uMuAJO_M2pxb1Q9zNjWeS6o'
+    openid:'oUpF8uMuAJO_M2pxb1Q9zNjWeS6o',
+    isshow:true,
+    bottomname:"数据加载中..."
   },
   onLoad: function (option) {
     var that = this;
@@ -42,6 +44,9 @@ Page({
    
   },
   queryByOpenid: function (openid, pageNo){
+    this.setData({
+      isshow:false
+    })
     var that = this;
     wx.request({
       url: app.globalData.url,
@@ -61,11 +66,16 @@ Page({
               var order = order2[i];
               order1.push(order);
             }
+          }else{
+            that.setData({
+              bottomname:"到底了..."
+            })
           }
         }
         that.setData({
           order: order1,
           dropDown:true,
+          // isshow:true,
         })
       }
     })

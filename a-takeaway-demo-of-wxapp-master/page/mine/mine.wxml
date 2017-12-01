@@ -18,7 +18,7 @@
           <view class='itemid'>订单编号 : {{item.restaurantorders}}</view>
         </view>
       </view>
-      <view class="viewline"></view>
+      <!-- <view class="viewline"></view> -->
 
       <view class='view2' wx:for="{{item.foods}}" wx:key="{{item.foods.id}}" wx:for-index="id" id="{{item.foods.id}}" wx:for-item="foodsitem">
         <view class='foodsitemname'>{{foodsitem.foodName}}</view>
@@ -30,12 +30,9 @@
           <span>{{item.ordermount}}</span>
         </view>
       </view>
-
-
-
     </view>
 
-
+    <view hidden='{{isshow}}' class="loading">{{bottomname}}</view>
   </scroll-view>
 
 
