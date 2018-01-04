@@ -1,44 +1,44 @@
 var app = getApp();
 var server = require('../../utils/server');
 Page({
-	data: {
-		filterId: 1,
-		address: '定位中…',
-    isshow : true,
-		banners: [
-			{
-				id: 3,
+  data: {
+    filterId: 1,
+    address: '定位中…',
+    isshow: true,
+    banners: [
+      {
+        id: 3,
         img: 'http://file.youboy.com/a/122/74/62/4/18990844.jpg',
-				url: '',
-				name: '百亿巨惠任你抢'
-			},
-			{
-				id: 1,
+        url: '',
+        name: '百亿巨惠任你抢'
+      },
+      {
+        id: 1,
         img: 'http://www.foodaily.com/file/upload/201408/14/11-02-01-55-101.jpg',
-				url: '',
-				name: '告别午高峰'
-			},
-			{
-				id: 2,
+        url: '',
+        name: '告别午高峰'
+      },
+      {
+        id: 2,
         img: 'http://bpic.ooopic.com/16/12/38/16123893-4f9c474840cdeafe72c6fdc574dc1790-1.jpg',
-				url: '',
-				name: '金牌好店'
-			}
-		],
-		shops: [],
-    pageNo:1,
-    bottomname:'努力加载中…',
-    toptrue :1
-	},
-	onLoad: function () {
-		var self = this;
+        url: '',
+        name: '金牌好店'
+      }
+    ],
+    shops: [],
+    pageNo: 1,
+    bottomname: '努力加载中…',
+    toptrue: 1
+  },
+  onLoad: function () {
+    var self = this;
     //进入页面后请求数据
     wx.request({
-      url: app.globalData.url, 
-      data :{
-        m:'smallapporder',
-        c:'SmallAppOrder',
-        a:'queryAllSeeler',
+      url: app.globalData.url,
+      data: {
+        m: 'smallapporder',
+        c: 'SmallAppOrder',
+        a: 'queryAllSeeler',
         pageNo: self.data.pageNo
       },
       method: 'GET',
@@ -51,8 +51,8 @@ Page({
           shops: res.data
         })
       },
-      complete :function(res){
-        console.log("网络请求信息为",res)
+      complete: function (res) {
+        console.log("网络请求信息为", res)
       }
 
     })
@@ -61,105 +61,130 @@ Page({
         self.setData({
           windowHeight: res.windowHeight,
           windowWidth: res.windowWidth
-        })  
+        })
       }
-    })
-	},
-	onShow: function () {
-	},
-	onScroll: function (e) {
-		if (e.detail.scrollTop > 100 && !this.data.scrollDown) {
-			this.setData({
-				scrollDown: true
-			});
-		} else if (e.detail.scrollTop < 100 && this.data.scrollDown) {
-			this.setData({
-				scrollDown: false
-			});
-		}
-	},
-	tapSearch: function () {
-		wx.navigateTo({url: 'search'});
-	},
-
-	tapFilter: function (e) {
-		switch (e.target.dataset.id) {
-			case '1':
-				this.data.shops.sort(function (a, b) {
-					return a.id > b.id;
-				});
-				break;
-			case '2':
-				this.data.shops.sort(function (a, b) {
-					return a.sales < b.sales;
-				});
-				break;
-			case '3':
-				this.data.shops.sort(function (a, b) {
-					return a.distance > b.distance;
-				});
-				break;
-		}
-		this.setData({
-			filterId: e.target.dataset.id,
-			shops: this.data.shops
-		});
-	},
-	
-  tapName : function(e){
-    console.log(e);
-    var id = e.currentTarget.dataset.id;
-    wx.navigateTo({
-      url: '/page/shop/shop?id=' + id
     })
   },
-  toprequest :function(e){
-    var that = this;
-    var shopmsg = that.data.shops;
-    if (that.data.toptrue==1){
-      that.setData({
-        toptrue :2
+  onShow: function () {
+  },
+  onScroll: function (e) {
+    if (e.detail.scrollTop > 100 && !this.data.scrollDown) {
+      this.setData({
+        scrollDown: true
       });
-    wx.request({
-      url: app.globalData.url,
-      data: {
-        m: 'smallapporder',
-        c: 'SmallAppOrder',
-        a: 'queryAllSeeler',
-        pageNo: that.data.pageNo+1
-      },
-      method: 'GET',
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-        console.log(res.data)
-        if (res.data.length>0){
-          for (var i = 0; i < res.data.length; i++) {
-            var shop = res.data[i];
-            shopmsg.push(shop);
+    } else if (e.detail.scrollTop < 100 && this.data.scrollDown) {
+      this.setData({
+        scrollDown: false
+      });
+    }
+  },
+  tapSearch: function () {
+    wx.navigateTo({ url: 'search' });
+  },
+
+  tapFilter: function (e) {
+    switch (e.target.dataset.id) {
+      case '1':
+        this.data.shops.sort(function (a, b) {
+          return a.id > b.id;
+        });
+        break;
+      case '2':
+        this.data.shops.sort(function (a, b) {
+          return a.sales < b.sales;
+        });
+        break;
+      case '3':
+        this.data.shops.sort(function (a, b) {
+          return a.distance > b.distance;
+        });
+        break;
+    }
+    this.setData({
+      filterId: e.target.dataset.id,
+      shops: this.data.shops
+    });
+  },
+
+  tapName: function (e) {
+    console.log(e);
+    var that = this;
+    var id = e.currentTarget.dataset.id;
+    var opneid =
+      wx.request({
+        url: app.globalData.url,
+        data: {
+          m: 'smallapporder',
+          c: 'SmallAppOrder',
+          a: 'queryUserInfoBindByOpenid',
+          openid: app.globalData.openid,
+        },
+        success: function (res) {
+          console.log("根据openid查询是否绑定", res.data);
+          var data = res.data;
+          var tourl;
+          //如果已经绑定就跳转至原页面
+          if (data == true) {
+            tourl = '/page/shop/shop?id=' + id
           }
-          that.setData({
-            shops: shopmsg,
-            pageNo: that.data.pageNo + 1,
-            isshow: false,
-            toptrue: 1
-          });
-        }else{
-          that.setData({
-            bottomname :'更多窗口接入中,敬请期待...',
-            isshow: false,
-            toptrue: 1
+          //如果没有绑定则跳转至绑定页面
+          if (data == false) {
+            tourl = '/page/bind/bind'
+          }
+          wx.navigateTo({
+            url: tourl
           })
         }
-        
-      },
-      complete: function (res) {
-        console.log("网络请求信息为", res)
-      }
-    })
-   
-  }
+      })
+
+  },
+  toprequest: function (e) {
+    var that = this;
+    var shopmsg = that.data.shops;
+    if (that.data.toptrue == 1) {
+      that.setData({
+        toptrue: 2
+      });
+      wx.request({
+        url: app.globalData.url,
+        data: {
+          m: 'smallapporder',
+          c: 'SmallAppOrder',
+          a: 'queryAllSeeler',
+          pageNo: that.data.pageNo + 1
+        },
+        method: 'GET',
+        header: {
+          'content-type': 'application/json' // 默认值
+        },
+        success: function (res) {
+          console.log(res.data)
+          if (res.data.length > 0) {
+            for (var i = 0; i < res.data.length; i++) {
+              var shop = res.data[i];
+              shopmsg.push(shop);
+            }
+            that.setData({
+              shops: shopmsg,
+              pageNo: that.data.pageNo + 1,
+              isshow: false,
+              toptrue: 1
+            });
+          } else {
+            that.setData({
+              bottomname: '更多窗口接入中,敬请期待...',
+              isshow: false,
+              toptrue: 1
+            })
+          }
+
+        },
+        complete: function (res) {
+          console.log("网络请求信息为", res)
+        }
+      })
+
+    }
   }
 });
 

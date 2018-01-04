@@ -1,50 +1,63 @@
 var server = require('./utils/server');
 App({
-	onLaunch: function () {
-		console.log('App Launch')
-		var self = this;
-		var rd_session = wx.getStorageSync('rd_session');
-		console.log('rd_session=', rd_session)
-		if (!rd_session) {
-			self.login("lizhen");
-		} else {
-			wx.checkSession({
-				success: function () {
-					// 登录态未过期
-					console.log('登录态未过期')
-					self.rd_session = rd_session;
-					self.getUserInfo();
-				},
-				fail: function () {
-					//登录态过期
-					self.login();
-				}
-			})
-		}
-	},
-	onShow: function () {
-		console.log('App Show')
-	},
-	onHide: function () {
-		console.log('App Hide')
-	},
-	globalData: {
-    url:'https://lizhen.ngrok.xiaomiqiu.cn/app.ZMTManage/index.jsp',
-		hasLogin: false,
-	},
-	rd_session: null,
+  onLaunch: function () {
+    var self = this;
+    wx.checkSession({
+      success: function () {
+        console.log('登录态未过期')
+        //判断openid是否存在,如果存在就不用登录,如果不存在就需要重新登录获取
+        if (!self.globalData.openid){
+          //获取用户信息
+          self.login();
+        }else{
+          self.getUserInfo();
+        }
+      
+        
+      },
+      fail: function () {
+        //登录态过期,进行登录
+        self.login();
+      }
+    })
 
-	login: function(pp) {
-		var self = this;
-		wx.login({
-			success: function (res) {
+  },
+
+  globalData: {
+    url: 'https://ma.ustb.edu.cn/app.ZMTManage/index.jsp',
+    hasLogin: false,
+  },
+  rd_session: null,
+
+  login: function () {
+    var self = this;
+    wx.login({
+      success: function (res) {
         console.log("李振测试", res);
         //res.code获取code,继而获取相关的信息,openid什么的...
+        self.getOpenid(res.code);
         self.getUserInfo();
-			}
-		});
-	},
-	getUserInfo: function() {
+      }
+    });
+  },
+  getOpenid: function (js_code){
+    var self = this;
+    wx.request({
+      url: self.globalData.url,
+      data: {
+        m: "smallapporder",
+        c: "SmallAppOrder",
+        a: "getOpenid",
+        js_code: js_code
+      },
+      success: function (res) {
+        console.log(res.data)
+        self.globalData.openid = res.data.openid;
+        self.globalData.session_key = res.data.session_key;
+      }
+    })
+  },
+  getUserInfo: function () {
     var self = this;
     wx.getSetting({
       success: res => {
@@ -53,13 +66,16 @@ App({
             withCredentials: true,
             success: function (res) {
               console.log('获取用户信息', res)
+              //获取到了用户信息
               self.globalData.userInfo = res.userInfo;
+
             }
           });
+    
         }
       }
     })
-	
-	
-	}
+
+
+  }
 })

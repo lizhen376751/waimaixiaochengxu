@@ -4,7 +4,8 @@
     "page/index/search",
     "page/shop/shop",
     "page/mine/mine",
-    "page/order/order"
+    "page/order/order",
+    "page/bind/bind"
   ],
   "window": {
     "navigationBarBackgroundColor": "#feb70f",

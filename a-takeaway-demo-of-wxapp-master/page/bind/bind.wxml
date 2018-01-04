@@ -1,0 +1,54 @@
+<view>
+  <form bindsubmit="formSubmit">
+    <view class='inputarray'>
+      <view>
+        <text>学号</text>
+        <input name="XH"  class="content" type="number" placeholder="学号"></input>
+      </view>
+      <view>
+        <text>姓名</text>
+        <input name="XM" placeholder="姓名"></input>
+      </view>
+      <view>
+        <text>性别</text>
+        <radio-group name="Sex">
+          <radio value="0" />男
+          <radio value="1" />女
+        </radio-group>
+      </view>
+
+      <view>
+        <text>人员类型</text>
+        <picker name="TypeId" bindchange="bindPickerChange" value="{{index}}" range="{{array}}" range-key="TypeName">
+          <view>
+            {{array[index].TypeName}}
+          </view>
+        </picker>
+      </view>
+
+      <view>
+        <text>身份证号</text>
+        <input name="Sfzh" type="idcard" placeholder="身份证号"></input>
+      </view>
+
+      <view>
+        <text> 所在学院</text>
+        <input name="Department" placeholder="学院(单位)"></input>
+      </view>
+      <view>
+        <text>支付宝号</text>
+        <input name="BindZfbCode" placeholder="支付宝账号"></input>
+      </view>
+      <view>
+        <text>一卡通号</text>
+        <input name="BindYktCode" placeholder="一卡通账号"></input>
+      </view>
+
+    </view>
+
+
+    <button class='submit'  disabled = "{{disabled}}" formType="submit">提交</button>
+
+  </form>
+
+</view>

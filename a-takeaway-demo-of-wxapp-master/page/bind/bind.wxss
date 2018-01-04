@@ -1,0 +1,33 @@
+.inputarray {
+  margin-top: 40rpx;
+  background: white;
+}
+
+.inputarray view {
+  display: flex;
+  flex-direction: row;
+  height: 115rpx;
+  width: 100%;
+  align-items: center;
+  border-top: 1rpx solid #e7e7e7;
+}
+
+.inputarray view text {
+  margin-left: 25rpx;
+  height: 30rpx;
+  width: 190rpx;
+  line-height: 30rpx;
+}
+
+.inputarray view input {
+  height: 30rpx;
+  width: 430rpx;
+}
+
+.submit {
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  height: 115rpx;
+  background: white;
+  width: 50%;
+}
