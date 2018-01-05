@@ -22,6 +22,18 @@ Page({
       this.queryByOpenid(this.data.pageNo);
   },
 
+  //滚动时触发
+  onGoodsScroll: function (e) {
+    if (e.detail.scrollTop > 10 && !this.data.scrollDown) {
+      this.setData({
+        scrollDown: true
+      });
+    } else if (e.detail.scrollTop < 10 && this.data.scrollDown) {
+      this.setData({
+        scrollDown: false
+      });
+    }
+  },
 
   onShow: function () {
     this.setData({
@@ -74,7 +86,7 @@ Page({
       },
       success: function (res) {
         var order1 = that.data.order;
-        if (pageNo == 1){
+        if (pageNo == 1) {
           order1 = [];
         }
         var order2 = res.data;

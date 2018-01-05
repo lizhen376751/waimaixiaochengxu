@@ -18,6 +18,14 @@ Page({
   },
   onLoad: function (options) {
     var that = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          windowHeight: res.windowHeight,
+          windowWidth: res.windowWidth
+        })
+      }
+    })
     that.setData({
       shopId: options.id
     })
@@ -51,6 +59,12 @@ Page({
         isshow: false,
       })
       this.requestFoodsBySeelerId(this.data.shopId, this.data.pageNo);
+    }else{
+      wx.showToast({
+        title: '暂无更多数据!',
+        icon: 'success',
+        duration: 300
+      })
     }
   },
   //根据店铺id查询食物列表

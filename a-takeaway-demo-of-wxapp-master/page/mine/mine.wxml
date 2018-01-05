@@ -1,36 +1,38 @@
 <view class="container">
-  <view class="header">
-    <image class="avatar" src="{{userInfo.avatarUrl}}" />
-    <view class="nickname">{{userInfo.nickName}}</view>
-  </view>
 
+  <scroll-view scroll-y="true" upper-threshold="50px" style="height: {{windowHeight}}px; width: {{windowWidth}}px;" bindscroll="onGoodsScroll" bindscrolltolower='scrollbottom' bindscrolltoupper="srollertop">
 
-  <scroll-view scroll-y="true" style="height: {{windowHeight}}px; width: {{windowWidth}}px;" class='scroll' bindscrolltolower='scrollbottom' bindscrolltoupper="srollertop">
-
-    <view class="order-item" wx:for="{{order}}" wx:key="{{order.id}}" wx:for-index="id" id="{{order.id}}" wx:for-item="item">
-      <view class='view1' bindtap="tapName" data-orderid="{{item.restaurantorders}}">
-        <view class='imageview'>
-          <!-- <image class="image" src="{{item.img}}"> </image> -->
-          <image class="image" src="http://uploadimg.globrand.com/UploadFiles/Ware/201707/20170703_180650284.jpg"></image>
+    <view class="header">
+      <image class="avatar" src="{{userInfo.avatarUrl}}" />
+      <view class="nickname">{{userInfo.nickName}}</view>
+    </view>
+    <view>
+      <view class="order-item" wx:for="{{order}}" wx:key="{{order.id}}" wx:for-index="id" id="{{order.id}}" wx:for-item="item">
+        <view class='view1' bindtap="tapName" data-orderid="{{item.restaurantorders}}">
+          <view class='imageview'>
+            <!-- <image class="image" src="{{item.img}}"> </image> -->
+            <image class="image" src="http://uploadimg.globrand.com/UploadFiles/Ware/201707/20170703_180650284.jpg"></image>
+          </view>
+          <view class='itemdec'>
+            <view class='itemname'>{{item.sellerName}} ({{item.sellerSite}})</view>
+            <view class='itemid'>订单编号 : {{item.restaurantorders}}</view>
+          </view>
         </view>
-        <view class='itemdec'>
-          <view class='itemname'>{{item.sellerName}} ({{item.sellerSite}})</view>
-          <view class='itemid'>订单编号 : {{item.restaurantorders}}</view>
+        <!-- <view class="viewline"></view> -->
+
+        <view class='view2' wx:for="{{item.foods}}" wx:key="{{item.foods.id}}" wx:for-index="id" id="{{item.foods.id}}" wx:for-item="foodsitem">
+          <view class='foodsitemname'>{{foodsitem.foodName}}</view>
+          <view class='foodsitemnum'> X {{foodsitem.sellerfoodnum}}</view>
         </view>
-      </view>
-      <!-- <view class="viewline"></view> -->
 
-      <view class='view2' wx:for="{{item.foods}}" wx:key="{{item.foods.id}}" wx:for-index="id" id="{{item.foods.id}}" wx:for-item="foodsitem">
-        <view class='foodsitemname'>{{foodsitem.foodName}}</view>
-        <view class='foodsitemnum'> X {{foodsitem.sellerfoodnum}}</view>
-      </view>
-
-      <view class='view3'>
-        <view class='viewnum'>共{{item.foodsnum}}几件商品￥:
-          <span>{{item.ordermount}}</span>
+        <view class='view3'>
+          <view class='viewnum'>共{{item.foodsnum}}几件商品￥:
+            <span>{{item.ordermount}}</span>
+          </view>
         </view>
       </view>
     </view>
+
 
     <view hidden='{{isshow}}' class="loading">{{bottomname}}</view>
   </scroll-view>

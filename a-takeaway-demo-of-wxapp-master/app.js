@@ -51,7 +51,7 @@ App({
         js_code: js_code
       },
       success: function (res) {
-        console.log(res.data)
+        console.log("获取到的openid为",res.data)
         self.globalData.openid = res.data.openid;
         self.globalData.session_key = res.data.session_key;
       }

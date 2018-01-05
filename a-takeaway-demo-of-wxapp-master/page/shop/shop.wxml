@@ -1,18 +1,20 @@
 <view class="container">
-  <view class="header {{scrollDown?'hidden':''}}">
-    <!-- <image class="logo" src="{{shop.img}}" /> -->
-    <image class="logo" src="http://sem.g3img.com/g3img/xxszpxxc/20160106083338_63723.png" />
-    <view class="name ellipsis">{{shop.SellerName}}</view>
-    <view class="welcome ellipsis">公告：欢迎光临{{shop.SellerName}}！</view>
-    <view class="welcome ellipsis">地址：{{shop.SellerSite}}！</view>
-    <view class="line"></view>
-    <!-- <view class="desc">{{shop.desc}}</view> -->
-    <view class="desc">主要食材是鸡腿肉，配以青椒、香菇等焖制而成，味道美妙，具有肉质鲜美嫩滑的特点</view>
-  </view>
 
 
-  <view class="content-container">
-    <scroll-view class="goods-container" scroll-y="true" scroll-into-view="{{classifyViewed}}" bindscroll="onGoodsScroll" bindscrolltoupper="bindbottom" bindscrolltolower="bindtop">
+
+  <!-- <view class="content-container"> -->
+    <scroll-view class="goods-container" style="height: {{windowHeight}}px; width: {{windowWidth}}px;" scroll-y="true" scroll-into-view="{{classifyViewed}}" bindscroll="onGoodsScroll" bindscrolltoupper="bindbottom" bindscrolltolower="bindtop">
+      <view class="header {{scrollDown?'hidden':''}}">
+        <!-- <image class="logo" src="{{shop.img}}" /> -->
+        <image class="logo" src="http://sem.g3img.com/g3img/xxszpxxc/20160106083338_63723.png" />
+        <view class="name ellipsis">{{shop.SellerName}}</view>
+        <view class="welcome ellipsis">公告：欢迎光临{{shop.SellerName}}！</view>
+        <view class="welcome ellipsis">地址：{{shop.SellerSite}}！</view>
+        <view class="line"></view>
+        <!-- <view class="desc">{{shop.desc}}</view> -->
+        <view class="desc">主要食材是鸡腿肉，配以青椒、香菇等焖制而成，味道美妙，具有肉质鲜美嫩滑的特点</view>
+      </view>
+
       <view class="goods" wx:for="{{goods}}" wx:key="id" wx:for-item="itemName">
         <!-- <image class="pic" src="{{itemName.pic}}"></image> -->
         <image class="pic" src="http://wxapp.im20.com.cn/impublic/waimai/imgs/goods/1.jpg"></image>
@@ -24,9 +26,8 @@
       </view>
       <view hidden='{{isshow}}' class="loading">{{bottomname}}</view>
     </scroll-view>
-  </view>
-
-
+  <!-- </view> -->
+  <!--测试加入这里  -->
 
   <view class="cart-detail" hidden="{{!showCartDetail||!cart.count}}">
     <view class="mask" bindtap="hideCartDetail"></view>
@@ -54,4 +55,6 @@
       <button class="yellow {{cart.count?'':'disabled'}}" formType="submit" disabled="{{!cart.count}}">下单</button>
     </form>
   </view>
+
+  <!--测试加入这里  -->
 </view>
