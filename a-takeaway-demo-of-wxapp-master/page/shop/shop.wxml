@@ -12,7 +12,7 @@
 
 
   <view class="content-container">
-    <scroll-view class="goods-container" scroll-y="true" scroll-into-view="{{classifyViewed}}" bindscroll="onGoodsScroll" bindscrolltolower = "bindtop">
+    <scroll-view class="goods-container" scroll-y="true" scroll-into-view="{{classifyViewed}}" bindscroll="onGoodsScroll" bindscrolltoupper="bindbottom" bindscrolltolower="bindtop">
       <view class="goods" wx:for="{{goods}}" wx:key="id" wx:for-item="itemName">
         <!-- <image class="pic" src="{{itemName.pic}}"></image> -->
         <image class="pic" src="http://wxapp.im20.com.cn/impublic/waimai/imgs/goods/1.jpg"></image>
@@ -25,7 +25,7 @@
       <view hidden='{{isshow}}' class="loading">{{bottomname}}</view>
     </scroll-view>
   </view>
- 
+
 
 
   <view class="cart-detail" hidden="{{!showCartDetail||!cart.count}}">

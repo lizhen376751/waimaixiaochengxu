@@ -29,7 +29,9 @@ Page({
     pageNo: 1,
     pageSize: 10,
     bottomname: '努力加载中…',
-    toptrue: true
+    toptrue: true,
+    placeholder: "黄焖鸡米饭",
+    searchWords: '',
   },
   onLoad: function () {
     var self = this;
@@ -42,6 +44,20 @@ Page({
         })
       }
     })
+  },
+  doSearch: function () {
+    this.setData({
+      shops: [],
+    });
+    this.queryAllSeeler(1);
+  },
+  inputSearch: function (e) {
+    this.setData({
+      searchWords: e.detail.value
+    });
+    if (this.data.searchWords.length == 0) {
+      this.queryAllSeeler(1);
+    }
   },
 
   onScroll: function (e) {
@@ -117,7 +133,7 @@ Page({
   },
   toprequest: function () {
     this.setData({
-      shops:[],
+      shops: [],
     })
     this.queryAllSeeler(1);
   },
@@ -134,7 +150,7 @@ Page({
     wx.showToast({
       title: '数据加载中...',
       icon: 'loading',
-      duration: 1500
+      duration: 1000
     })
     var that = this;
     that.setData({
@@ -149,6 +165,7 @@ Page({
         a: 'queryAllSeeler',
         pageNo: pageNo,
         pageSize: that.data.pageSize,
+        likeName: that.data.searchWords,
       },
 
       success: function (res) {
