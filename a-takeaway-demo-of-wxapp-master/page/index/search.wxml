@@ -12,12 +12,14 @@
       <view class="shop" wx:for="{{shops}}" wx:key="id">
         <navigator class='shopconnection' url="/page/shop/shop?id={{item.id}}">
           <view>
-            <image src="{{item.img}}" />
+            <!-- <image src="{{item.img}}" /> -->
+          <image class='shopimage' src="http://uploadimg.globrand.com/UploadFiles/Ware/201707/20170703_180650284.jpg" />
           </view>
           <view class='shopname'>
-            <view class='itemname'>{{item.name}}</view>
-            <view class='itemaddress'>{{item.address}}</view>
-            <view class='itemdesc'>{{item.desc}}</view>
+            <view class='itemname'>{{item.SellerName}}</view>
+            <view class='itemaddress'>{{item.SellerSite}}</view>
+            <!-- <view class='itemdesc'>{{item.desc}}</view> -->
+              <view class='shopdesc'>杨国福麻辣烫风味独特富含多种健康的绿色蔬菜、藻类、菌类、豆制品。麻、辣、鲜、香。让您回味无穷，流连忘返</view>
           </view>
         </navigator>
       </view>

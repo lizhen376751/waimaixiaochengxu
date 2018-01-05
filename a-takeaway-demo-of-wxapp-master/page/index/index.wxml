@@ -7,7 +7,7 @@
     </view>
   </view>
 
-  <scroll-view scroll-y="true" style="height: {{windowHeight}}px; width: {{windowWidth}}px;" bindscroll="onScroll" bindscrolltolower="toprequest">
+  <scroll-view scroll-y="true" style="height: {{windowHeight}}px; width: {{windowWidth}}px;" bindscroll="onScroll" bindscrolltolower="bottomrequest" bindscrolltoupper="toprequest">
     <swiper class="banner" indicator-dots="true" autoplay="true" interval="3000" duration="500">
       <block wx:for="{{banners}}" wx:key="id">
         <swiper-item>

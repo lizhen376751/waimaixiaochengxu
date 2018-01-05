@@ -11,15 +11,15 @@ Page({
     newlist: {},
     showCartDetail: false,
     pageNo: 1,
-    shopId:null,
-    topdown:true,
-    isshow:true,
-    bottomname:"数据加载中...",
+    shopId: null,
+    topdown: true,
+    isshow: true,
+    bottomname: "数据加载中...",
   },
   onLoad: function (options) {
     var that = this;
     that.setData({
-      shopId : options.id
+      shopId: options.id
     })
     wx.request({
       url: app.globalData.url,
@@ -43,10 +43,10 @@ Page({
       }
     })
     that.requestFoodsBySeelerId(that.data.shopId, 1);
-    
+
   },
   //根据店铺id查询食物列表
-  requestFoodsBySeelerId: function (id,pageNo){
+  requestFoodsBySeelerId: function (id, pageNo) {
     var that = this;
     wx.request({
       url: app.globalData.url,
@@ -60,23 +60,23 @@ Page({
       success: function (res) {
         var goods1 = that.data.goods;
         var goods2 = res.data;
-        if (goods1.length>0){
+        if (goods1.length > 0) {
           if (goods2.length > 0) {
             for (var i = 0; i < goods2.length; i++) {
               var good = goods2[i];
               goods1.push(good);
             }
-        }else{
+          } else {
             that.setData({
               bottomname: "到底了...",
             })
-        }
-        }else{
+          }
+        } else {
           goods1 = goods2;
         }
         that.setData({
           goods: goods1,
-          topdown : true,
+          topdown: true,
         })
       },
 
@@ -228,14 +228,14 @@ Page({
     //   h += _h;
     // });
   },
-  bindtop :function(){
-    if(this.data.topdown=true){
+  bindtop: function () {
+    if (this.data.topdown = true) {
       this.setData({
-        topdown : false,
-        pageNo : this.data.pageNo + 1,
-        isshow:false,
+        topdown: false,
+        pageNo: this.data.pageNo + 1,
+        isshow: false,
       })
-     
+
       this.requestFoodsBySeelerId(this.data.shopId, this.data.pageNo);
     }
   },
@@ -276,34 +276,36 @@ Page({
         a: "placeOrder",
         foods: foods,
         shop: shop,
-        openid:'oUpF8uMuAJO_M2pxb1Q9zNjWeS6o',
-        nickName:'李振'
-
+        openid: app.globalData.openid,
+        nickName: app.globalData.userInfo.nickName,
       },
       success: function (res) {
         console.log("结算请求返回数据", res);
         var restaurantorders = res.data.restaurantorders;
-        wx.requestPayment({
-          'timeStamp': res.data.timeStamp,
-          'nonceStr': res.data.nonceStr,
-          'package': res.data.package1,
-          'signType': res.data.signType,
-          'paySign': res.data.paySign,
-          'success': function (res) {
-            console.log("支付成功,然后页面跳转", restaurantorders);
-            wx.redirectTo({
-              url: '/page/order/order?id='+restaurantorders
-            })
-          },
-          'fail': function (res) {
-            console.log("支付失败,然后模拟页面跳转", restaurantorders);
-            wx.redirectTo({
-              url: '/page/order/order?id='+restaurantorders
-            })
-          }
-        })
+        if (!restaurantorders.length == 0){
+          wx.showToast({
+            title: '下单成功',
+            icon: 'success',
+            duration: 2000,
+            success:function(){
+              wx.redirectTo({
+                url: '/page/order/order?id=' + restaurantorders
+              })
+            }
+          })
+        
+        }else{
+          wx.showToast({
+            title: '下单失败',
+            icon: 'warn',
+            duration: 2000
+          })
+        }
+        
       }
     })
+
+
     // wx.showModal({
     //   showCancel: false,
     //   title: '恭喜',
@@ -314,6 +316,28 @@ Page({
     //         url: '/page/order/order'
     //       })
     //     }
+    //   }
+    // })
+
+
+    //微信支付暂时不用
+    // wx.requestPayment({
+    //   'timeStamp': res.data.timeStamp,
+    //   'nonceStr': res.data.nonceStr,
+    //   'package': res.data.package1,
+    //   'signType': res.data.signType,
+    //   'paySign': res.data.paySign,
+    //   'success': function (res) {
+    //     console.log("支付成功,然后页面跳转", restaurantorders);
+    //     wx.redirectTo({
+    //       url: '/page/order/order?id='+restaurantorders
+    //     })
+    //   },
+    //   'fail': function (res) {
+    //     console.log("支付失败,然后模拟页面跳转", restaurantorders);
+    //     wx.redirectTo({
+    //       url: '/page/order/order?id='+restaurantorders
+    //     })
     //   }
     // })
   }

@@ -5,7 +5,7 @@
   </view>
 
 
-  <scroll-view scroll-y="true" style="height: {{windowHeight}}px; width: {{windowWidth}}px;" class='scroll' bindscrolltolower='scroll'>
+  <scroll-view scroll-y="true" style="height: {{windowHeight}}px; width: {{windowWidth}}px;" class='scroll' bindscrolltolower='scrollbottom' bindscrolltoupper="srollertop">
 
     <view class="order-item" wx:for="{{order}}" wx:key="{{order.id}}" wx:for-index="id" id="{{order.id}}" wx:for-item="item">
       <view class='view1' bindtap="tapName" data-orderid="{{item.restaurantorders}}">
@@ -26,7 +26,7 @@
       </view>
 
       <view class='view3'>
-        <view class='viewnum'>共{{item.foodsnum}}几件商品,实付￥
+        <view class='viewnum'>共{{item.foodsnum}}几件商品￥:
           <span>{{item.ordermount}}</span>
         </view>
       </view>

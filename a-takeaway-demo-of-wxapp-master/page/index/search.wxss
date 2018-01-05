@@ -22,7 +22,7 @@
 
 .header .search .icon {
 	float: left;
-	margin: 1rpx 5rpx 0 0;
+	margin: 7rpx 5rpx 0 0;
 }
 
 .header button {
@@ -32,7 +32,6 @@
 
 .header input {
 	height: 30rpx;
-	min-height: 40rpx;
 }
 
 .result {

@@ -27,35 +27,13 @@ Page({
     ],
     shops: [],
     pageNo: 1,
+    pageSize: 10,
     bottomname: '努力加载中…',
-    toptrue: 1
+    toptrue: true
   },
   onLoad: function () {
     var self = this;
-    //进入页面后请求数据
-    wx.request({
-      url: app.globalData.url,
-      data: {
-        m: 'smallapporder',
-        c: 'SmallAppOrder',
-        a: 'queryAllSeeler',
-        pageNo: self.data.pageNo
-      },
-      method: 'GET',
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-        console.log(res.data)
-        self.setData({
-          shops: res.data
-        })
-      },
-      complete: function (res) {
-        console.log("网络请求信息为", res)
-      }
-
-    })
+    self.queryAllSeeler(1);
     wx.getSystemInfo({
       success: function (res) {
         self.setData({
@@ -65,8 +43,7 @@ Page({
       }
     })
   },
-  onShow: function () {
-  },
+
   onScroll: function (e) {
     if (e.detail.scrollTop > 100 && !this.data.scrollDown) {
       this.setData({
@@ -138,53 +115,69 @@ Page({
       })
 
   },
-  toprequest: function (e) {
-    var that = this;
-    var shopmsg = that.data.shops;
-    if (that.data.toptrue == 1) {
-      that.setData({
-        toptrue: 2
-      });
-      wx.request({
-        url: app.globalData.url,
-        data: {
-          m: 'smallapporder',
-          c: 'SmallAppOrder',
-          a: 'queryAllSeeler',
-          pageNo: that.data.pageNo + 1
-        },
-        method: 'GET',
-        header: {
-          'content-type': 'application/json' // 默认值
-        },
-        success: function (res) {
-          console.log(res.data)
-          if (res.data.length > 0) {
-            for (var i = 0; i < res.data.length; i++) {
-              var shop = res.data[i];
-              shopmsg.push(shop);
-            }
-            that.setData({
-              shops: shopmsg,
-              pageNo: that.data.pageNo + 1,
-              isshow: false,
-              toptrue: 1
-            });
-          } else {
-            that.setData({
-              bottomname: '更多窗口接入中,敬请期待...',
-              isshow: false,
-              toptrue: 1
-            })
-          }
-
-        },
-        complete: function (res) {
-          console.log("网络请求信息为", res)
-        }
+  toprequest: function () {
+    this.setData({
+      shops:[],
+    })
+    this.queryAllSeeler(1);
+  },
+  bottomrequest: function (e) {
+    if (this.data.toptrue == true) {
+      this.setData({
+        toptrue: false,
       })
-
+      this.queryAllSeeler(this.data.pageNo)
     }
+
+  },
+  queryAllSeeler: function (pageNo) {
+    wx.showToast({
+      title: '数据加载中...',
+      icon: 'loading',
+      duration: 1500
+    })
+    var that = this;
+    that.setData({
+      isshow: false,
+    })
+    var shopmsg = that.data.shops;
+    wx.request({
+      url: app.globalData.url,
+      data: {
+        m: 'smallapporder',
+        c: 'SmallAppOrder',
+        a: 'queryAllSeeler',
+        pageNo: pageNo,
+        pageSize: that.data.pageSize,
+      },
+
+      success: function (res) {
+
+        for (var i = 0; i < res.data.length; i++) {
+          var shop = res.data[i];
+          shopmsg.push(shop);
+        }
+        if (res.data.length == that.data.pageSize) {
+          that.setData({
+            shops: shopmsg,
+            pageNo: that.data.pageNo + 1,
+            isshow: true,
+            toptrue: true
+          });
+        } else {
+          that.setData({
+            shops: shopmsg,
+            bottomname: '更多窗口接入中,敬请期待...',
+            isshow: false,
+            toptrue: false
+          })
+        }
+
+      },
+
+    })
+
   }
+
 });
 

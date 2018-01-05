@@ -11,12 +11,6 @@
         <view class='ordertwo'>订单时间:</view>
         <view class='orderthree'>{{ordertime}}</view>
       </view>
-
-      <view class='orderone'>
-        <view class='ordertwo'>支付方式:</view>
-        <view class='orderthree'>微信支付</view>
-      </view>
-
     </view>
 
 

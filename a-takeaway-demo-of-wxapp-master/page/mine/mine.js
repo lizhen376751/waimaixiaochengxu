@@ -1,13 +1,14 @@
 var app = getApp();
 Page({
-	data: {
-    order :[],
-    pageNo:1,
-    dropDown:true,
-    openid:'oUpF8uMuAJO_M2pxb1Q9zNjWeS6o',
-    isshow:true,
-    bottomname:"数据加载中..."
+  data: {
+    order: [],
+    pageNo: 1,
+    dropDown: true,
+    pageSize: 10,
+    isshow: true,
+    bottomname: "数据加载中..."
   },
+
   onLoad: function (option) {
     var that = this;
     wx.getSystemInfo({
@@ -18,13 +19,17 @@ Page({
         })
       }
     }),
-    this.queryByOpenid(this.data.openid, this.data.pageNo);
-	},
-	onShow: function () {
-		this.setData({
-			userInfo: app.globalData.userInfo
-		});
-	},
+      this.queryByOpenid(this.data.pageNo);
+  },
+
+
+  onShow: function () {
+    this.setData({
+      userInfo: app.globalData.userInfo
+    });
+  },
+
+
   tapName: function (event) {
     var id = event.currentTarget.dataset.orderid;
     wx.navigateTo({
@@ -32,19 +37,29 @@ Page({
     })
 
   },
-  scroll:function(event){
-    if (this.data.dropDown==true){
+
+  scrollbottom: function (event) {
+    console.log("上拉加载!!!!");
+    if (this.data.dropDown == true) {
       this.setData({
-        dropDown: false,
-        pageNo:this.data.pageNo+1,
+        dropDown: false
       })
-      this.queryByOpenid(this.data.openid, this.data.pageNo);
+      this.queryByOpenid(this.data.pageNo);
     }
-   
+
   },
-  queryByOpenid: function (openid, pageNo){
+
+  srollertop: function () {
+    console.log("下拉刷新!!!!");
     this.setData({
-      isshow:false
+      order: [],
+    })
+    this.queryByOpenid(1);
+  },
+
+  queryByOpenid: function (pageNo) {
+    this.setData({
+      isshow: false
     })
     var that = this;
     wx.request({
@@ -53,28 +68,36 @@ Page({
         m: 'smallapporder',
         c: 'SmallAppOrder',
         a: 'queryOrdersByOpenid',
-        openid: that.data.openid,
-        pageNo: that.data.pageNo,
+        openid: app.globalData.openid,
+        pageNo: pageNo,
+        pageSize: that.data.pageSize,
       },
       success: function (res) {
         var order1 = that.data.order;
-        var order2 = res.data;
-        if (order1!=null){
-          if (order2.length > 0) {
-            for (var i = 0; i < order2.length; i++) {
-              var order = order2[i];
-              order1.push(order);
-            }
-          }else{
-            that.setData({
-              bottomname:"到底了..."
-            })
-          }
+        if (pageNo == 1){
+          order1 = [];
         }
+        var order2 = res.data;
+        for (var i = 0; i < order2.length; i++) {
+          var order = order2[i];
+          order1.push(order);
+        }
+        if (order2.length == that.data.pageSize) {
+          that.setData({
+            pageNo: pageNo + 1,
+            isshow: true,
+            dropDown: true,
+          })
+        } else {
+          that.setData({
+            isshow: false,
+            bottomname: "到底了...",
+            dropDown: false,
+          })
+        }
+
         that.setData({
           order: order1,
-          dropDown:true,
-          // isshow:true,
         })
       }
     })

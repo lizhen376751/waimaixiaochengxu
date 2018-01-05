@@ -51,7 +51,7 @@
       <view class="total">￥{{cart.total}}</view>
     </view>
     <form bindsubmit="submit" report-submit="true">
-      <button class="yellow {{cart.count?'':'disabled'}}" formType="submit" disabled="{{!cart.count}}">去结算</button>
+      <button class="yellow {{cart.count?'':'disabled'}}" formType="submit" disabled="{{!cart.count}}">下单</button>
     </form>
   </view>
 </view>
