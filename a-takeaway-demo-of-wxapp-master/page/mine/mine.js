@@ -49,7 +49,25 @@ Page({
     })
 
   },
-
+  //下拉刷新
+  onPullDownRefresh: function () {
+    console.log("下拉刷新");
+    this.setData({
+      order: [],
+    })
+    this.queryByOpenid(1);
+    wx.stopPullDownRefresh() //停止下拉刷新
+  },
+  //页面上拉触底事件的处理函数
+  onReachBottom: function () {
+    console.log('加载更多')
+    if (this.data.dropDown == true) {
+      this.setData({
+        dropDown: false
+      })
+      this.queryByOpenid(this.data.pageNo);
+    }
+  },
   scrollbottom: function (event) {
     console.log("上拉加载!!!!");
     if (this.data.dropDown == true) {
@@ -72,6 +90,11 @@ Page({
   queryByOpenid: function (pageNo) {
     this.setData({
       isshow: false
+    })
+    wx.showToast({
+      title: '数据加载中...',
+      icon: 'loading',
+      duration: 500
     })
     var that = this;
     wx.request({
@@ -107,10 +130,16 @@ Page({
             dropDown: false,
           })
         }
-
         that.setData({
           order: order1,
-        })
+        });
+        console.log(order1.length == 0)
+        if (pageNo == 1 && order1.length==0){
+          that.setData({
+            bottomname: "暂无订单",
+          });
+        }
+       
       }
     })
   }

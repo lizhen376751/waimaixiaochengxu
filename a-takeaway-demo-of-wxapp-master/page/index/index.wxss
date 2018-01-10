@@ -7,10 +7,6 @@ page {
 }
 
 
-scroll-view {
-  height: 100%;
-}
-
 .header {
   position: fixed;
   display: -webkit-flex;

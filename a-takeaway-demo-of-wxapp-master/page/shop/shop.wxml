@@ -3,7 +3,9 @@
 
 
   <!-- <view class="content-container"> -->
-    <scroll-view class="goods-container" style="height: {{windowHeight}}px; width: {{windowWidth}}px;" scroll-y="true" scroll-into-view="{{classifyViewed}}" bindscroll="onGoodsScroll" bindscrolltoupper="bindbottom" bindscrolltolower="bindtop">
+    <!-- <scroll-view class="goods-container" style="height: {{windowHeight}}px; width: {{windowWidth}}px;" scroll-y="true" scroll-into-view="{{classifyViewed}}" bindscroll="onGoodsScroll" bindscrolltoupper="bindbottom" bindscrolltolower="bindtop"> -->
+
+        <scroll-view class="goods-container">
       <view class="header {{scrollDown?'hidden':''}}">
         <!-- <image class="logo" src="{{shop.img}}" /> -->
         <image class="logo" src="http://sem.g3img.com/g3img/xxszpxxc/20160106083338_63723.png" />

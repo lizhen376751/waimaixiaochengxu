@@ -31,11 +31,10 @@ Page({
     bottomname: '努力加载中…',
     toptrue: true,
     placeholder: "黄焖鸡米饭",
-    searchWords: '',
+    searchWords: '黄焖鸡米饭',
   },
   onLoad: function () {
     var self = this;
-    self.queryAllSeeler(1);
     wx.getSystemInfo({
       success: function (res) {
         self.setData({
@@ -43,20 +42,45 @@ Page({
           windowWidth: res.windowWidth
         })
       }
-    })
+    }),
+    self.queryAllSeeler(1,"");
+    
   },
+  //下拉刷新
+  onPullDownRefresh: function () {
+    console.log("下拉刷新");
+    this.setData({
+      shops: [],
+    })
+    this.queryAllSeeler(1, this.data.searchWords);
+    wx.stopPullDownRefresh() //停止下拉刷新
+  },
+  //页面上拉触底事件的处理函数
+  onReachBottom: function () {
+    console.log('加载更多')
+    if (this.data.toptrue == true) {
+      this.setData({
+        toptrue: false,
+      })
+      this.queryAllSeeler(this.data.pageNo, this.data.searchWords)
+    }
+  },
+
   doSearch: function () {
     this.setData({
       shops: [],
     });
-    this.queryAllSeeler(1);
+    this.queryAllSeeler(1, this.data.searchWords);
   },
   inputSearch: function (e) {
     this.setData({
       searchWords: e.detail.value
     });
     if (this.data.searchWords.length == 0) {
-      this.queryAllSeeler(1);
+      this.setData({
+        shops: [],
+      });
+      this.queryAllSeeler(1,"");
     }
   },
 
@@ -119,11 +143,11 @@ Page({
       this.setData({
         toptrue: false,
       })
-      this.queryAllSeeler(this.data.pageNo)
+      this.queryAllSeeler(this.data.pageNo, this.data.searchWords)
     }
 
   },
-  queryAllSeeler: function (pageNo) {
+  queryAllSeeler: function (pageNo,searchWords) {
     wx.showToast({
       title: '数据加载中...',
       icon: 'loading',
@@ -142,7 +166,7 @@ Page({
         a: 'queryAllSeeler',
         pageNo: pageNo,
         pageSize: that.data.pageSize,
-        likeName: that.data.searchWords,
+        likeName: searchWords,
       },
 
       success: function (res) {

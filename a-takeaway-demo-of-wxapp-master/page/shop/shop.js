@@ -46,6 +46,34 @@ Page({
     that.requestFoodsBySeelerId(that.data.shopId, 1);
 
   },
+
+  //下拉刷新
+  onPullDownRefresh: function () {
+    console.log("下拉刷新");
+    this.setData({
+      goods: [],
+    })
+    this.requestFoodsBySeelerId(this.data.shopId, 1);
+    wx.stopPullDownRefresh() //停止下拉刷新
+  },
+  //页面上拉触底事件的处理函数
+  onReachBottom: function () {
+    console.log('加载更多')
+    if (this.data.topdown == true) {
+      this.setData({
+        topdown: false,
+        isshow: false,
+      })
+      this.requestFoodsBySeelerId(this.data.shopId, this.data.pageNo);
+    } else {
+      wx.showToast({
+        title: '暂无更多数据!',
+        icon: 'success',
+        duration: 300
+      })
+    }
+  },
+
   bindbottom() {
     this.setData({
       goods: [],

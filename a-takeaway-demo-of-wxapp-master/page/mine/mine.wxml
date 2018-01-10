@@ -1,7 +1,7 @@
 <view class="container">
 
-  <scroll-view scroll-y="true" upper-threshold="50px" style="height: {{windowHeight}}px; width: {{windowWidth}}px;" bindscroll="onGoodsScroll" bindscrolltolower='scrollbottom' bindscrolltoupper="srollertop">
-
+  <!-- <scroll-view scroll-y="true" upper-threshold="50px" style="height: {{windowHeight}}px; width: {{windowWidth}}px;" bindscroll="onGoodsScroll" bindscrolltolower='scrollbottom' bindscrolltoupper="srollertop"> -->
+  <scroll-view>
     <view class="header">
       <image class="avatar" src="{{userInfo.avatarUrl}}" />
       <view class="nickname">{{userInfo.nickName}}</view>

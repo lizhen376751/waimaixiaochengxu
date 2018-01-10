@@ -3,7 +3,7 @@
   <view class="header {{scrollDown?'scrolled':''}}">
     <view class="search">
       <image class="icon" src="/imgs/index/icon_search.png" />
-     <input class = "searchinput" bindinput="inputSearch" placeholder="{{placeholder}}" focus/>
+     <input value ="{{searchWords}}" class = "searchinput" bindinput="inputSearch"  focus/>
     </view>
       <button class="yellow {{searchWords.length?'':'disabled'}}" size="mini" hover-class="hover" loading="" plain="" disabled="{{!searchWords.length}}" bindtap="doSearch">搜索
     </button>
@@ -17,7 +17,8 @@
     </view>
   </view> -->
 
-  <scroll-view scroll-y="true" style="height: {{windowHeight}}px; width: {{windowWidth}}px;" bindscroll="onScroll" bindscrolltolower="bottomrequest" bindscrolltoupper="toprequest">
+  <!-- <scroll-view scroll-y="true" style="height: {{windowHeight}}px; width: {{windowWidth}}px;" bindscroll="onScroll" bindscrolltolower="bottomrequest" bindscrolltoupper="toprequest"> -->
+    <scroll-view>
     <swiper class="banner" indicator-dots="true" autoplay="true" interval="3000" duration="500">
       <block wx:for="{{banners}}" wx:key="id">
         <swiper-item>
