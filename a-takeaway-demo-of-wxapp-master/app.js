@@ -64,8 +64,9 @@ App({
     var self = this;
     wx.getSetting({
       success: res => {
-
-
+        /**
+         * 获取用户信息
+         */
         wx.getUserInfo({
           withCredentials: true,
           success: function (res) {
@@ -75,39 +76,6 @@ App({
 
           }
         })
-
-        // if (res.authSetting['scope.userInfo']) {
-        //   wx.getUserInfo({
-        //     withCredentials: true,
-        //     success: function (res) {
-        //       console.log('获取用户信息', res)
-        //       //获取到了用户信息
-        //       self.globalData.userInfo = res.userInfo;
-
-        //     }
-        //   });
-    
-        // }else{
-        //   wx.openSetting({
-        //     success: (res) => {
-
-        //       if (res.authSetting['scope.userInfo']) {
-        //         wx.getUserInfo({
-        //           withCredentials: true,
-        //           success: function (res) {
-        //             console.log('获取用户信息', res)
-        //             //获取到了用户信息
-        //             self.globalData.userInfo = res.userInfo;
-
-        //           }
-        //         });
-
-        //       }
-        //     }
-        //   })
-        // }
-
-        
       }
     })
 

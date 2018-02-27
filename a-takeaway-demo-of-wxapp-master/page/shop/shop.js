@@ -87,7 +87,7 @@ Page({
         isshow: false,
       })
       this.requestFoodsBySeelerId(this.data.shopId, this.data.pageNo);
-    }else{
+    } else {
       wx.showToast({
         title: '暂无更多数据!',
         icon: 'success',
@@ -336,16 +336,44 @@ Page({
         console.log("结算请求返回数据", res);
         var restaurantorders = res.data.restaurantorders;
         if (!restaurantorders.length == 0) {
-          wx.showToast({
-            title: '下单成功',
-            icon: 'success',
-            duration: 2000,
-            success: function () {
+
+
+          //微信支付暂时不用
+          wx.requestPayment({
+            'timeStamp': res.data.timeStamp,
+            'nonceStr': res.data.nonceStr,
+            'package': res.data.package1,
+            'signType': res.data.signType,
+            'paySign': res.data.paySign,
+            'success': function (res) {
+              console.log("支付成功,然后页面跳转", restaurantorders);
               wx.redirectTo({
-                url: '/page/order/order?id=' + restaurantorders
+                url: '/page/order/order?id='+restaurantorders
+              })
+            },
+            'fail': function (res) {
+              console.log("支付失败,然后模拟页面跳转", restaurantorders);
+              wx.redirectTo({
+                url: '/page/order/order?id='+restaurantorders
               })
             }
           })
+
+
+          /**
+           * 暂时注释
+           * 主要功能:1.有一个提示框,2.跳转至下单页面
+           */
+          // wx.showToast({
+          //   title: '下单成功',
+          //   icon: 'success',
+          //   duration: 2000,
+          //   success: function () {
+          //     wx.redirectTo({
+          //       url: '/page/order/order?id=' + restaurantorders
+          //     })
+          //   }
+          // })
 
         } else {
           wx.showToast({
@@ -373,26 +401,7 @@ Page({
     // })
 
 
-    //微信支付暂时不用
-    // wx.requestPayment({
-    //   'timeStamp': res.data.timeStamp,
-    //   'nonceStr': res.data.nonceStr,
-    //   'package': res.data.package1,
-    //   'signType': res.data.signType,
-    //   'paySign': res.data.paySign,
-    //   'success': function (res) {
-    //     console.log("支付成功,然后页面跳转", restaurantorders);
-    //     wx.redirectTo({
-    //       url: '/page/order/order?id='+restaurantorders
-    //     })
-    //   },
-    //   'fail': function (res) {
-    //     console.log("支付失败,然后模拟页面跳转", restaurantorders);
-    //     wx.redirectTo({
-    //       url: '/page/order/order?id='+restaurantorders
-    //     })
-    //   }
-    // })
+
   }
 });
 
