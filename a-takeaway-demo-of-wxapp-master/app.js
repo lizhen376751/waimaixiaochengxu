@@ -26,6 +26,8 @@ App({
   globalData: {
     url: 'https://ma.ustb.edu.cn/app.ZMTManage/index.jsp',
     hasLogin: false,
+    openid:null,
+    session_key:null
   },
   rd_session: null,
 
@@ -53,6 +55,7 @@ App({
       success: function (res) {
         console.log("获取到的openid为",res.data)
         self.globalData.openid = res.data.openid;
+        console.log("将openid存放在本地", self.globalData.openid)
         self.globalData.session_key = res.data.session_key;
       }
     })
@@ -61,18 +64,50 @@ App({
     var self = this;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          wx.getUserInfo({
-            withCredentials: true,
-            success: function (res) {
-              console.log('获取用户信息', res)
-              //获取到了用户信息
-              self.globalData.userInfo = res.userInfo;
 
-            }
-          });
+
+        wx.getUserInfo({
+          withCredentials: true,
+          success: function (res) {
+            console.log('获取用户信息', res)
+            //获取到了用户信息
+            self.globalData.userInfo = res.userInfo;
+
+          }
+        })
+
+        // if (res.authSetting['scope.userInfo']) {
+        //   wx.getUserInfo({
+        //     withCredentials: true,
+        //     success: function (res) {
+        //       console.log('获取用户信息', res)
+        //       //获取到了用户信息
+        //       self.globalData.userInfo = res.userInfo;
+
+        //     }
+        //   });
     
-        }
+        // }else{
+        //   wx.openSetting({
+        //     success: (res) => {
+
+        //       if (res.authSetting['scope.userInfo']) {
+        //         wx.getUserInfo({
+        //           withCredentials: true,
+        //           success: function (res) {
+        //             console.log('获取用户信息', res)
+        //             //获取到了用户信息
+        //             self.globalData.userInfo = res.userInfo;
+
+        //           }
+        //         });
+
+        //       }
+        //     }
+        //   })
+        // }
+
+        
       }
     })
 

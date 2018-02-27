@@ -6,11 +6,15 @@ Page({
     dropDown: true,
     pageSize: 10,
     isshow: true,
-    bottomname: "数据加载中..."
+    bottomname: "数据加载中...",
+    userInfo: app.globalData.userInfo
   },
 
   onLoad: function (option) {
     var that = this;
+    that.setData({
+      userInfo: app.globalData.userInfo
+    })
     wx.getSystemInfo({
       success: function (res) {
         that.setData({

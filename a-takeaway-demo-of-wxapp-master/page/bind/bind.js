@@ -8,7 +8,7 @@ Page({
     index: 0,
     array: {},
     TypeId: 0,
-    disabled:false,
+    disabled: false,
   },
   onLoad: function (option) {
     var that = this;
@@ -53,23 +53,36 @@ Page({
 
         if (res.data == true) {
 
+          /**
+           * 点击退出登录事件
+           */
           wx.showModal({
             title: '成功',
             content: '信息绑定成功',
-            showCancel:false,
+            showCancel: false,
             success: function (res) {
               if (res.confirm) {
                 console.log('用户点击确定')
+                /**
+                 * 点击确定之后将按钮设置为不可用
+                 */
                 that.setData({
-                 disabled:true
-               })
-               
-              } 
+                  disabled: true
+                })
+                /**
+                 * 接着跳转至首页
+                 */
+
+                wx.switchTab({
+                  url: '../index/index'
+                })
+
+              }
             }
           })
 
         }
-        if (res.data == false){
+        if (res.data == false) {
           wx.showToast({
             title: '身份绑定失败',
             icon: 'warn',
