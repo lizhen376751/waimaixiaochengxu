@@ -31,3 +31,18 @@
   background: white;
   width: 50%;
 }
+
+/*提交时表单错误提示  */
+.ad_popError {
+  background: #de352d;
+  color: #fff;
+  height: 70rpx;
+  line-height: 58rpx;
+  font-size: 30rpx;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 3;
+}

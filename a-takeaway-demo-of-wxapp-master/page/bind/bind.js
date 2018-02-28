@@ -9,6 +9,7 @@ Page({
     array: {},
     TypeId: 0,
     disabled: false,
+    popErrorMsg: null,
   },
   onLoad: function (option) {
     var that = this;
@@ -32,6 +33,61 @@ Page({
     var that = this;
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
     console.log('openid携带数据为：', app.globalData.openid)
+
+    /**
+     * 首先判断是否有空的选项
+     */
+    if (!e.detail.value.XH) {
+      that.setData(
+        { popErrorMsg: "学号不能为空" }
+      );
+      that.ohShitfadeOut();
+      return;
+    }
+    if (!e.detail.value.XM) {
+      that.setData(
+        { popErrorMsg: "姓名不能为空" }
+      );
+      that.ohShitfadeOut();
+      return ;
+    }
+    if (!e.detail.value.Sex) {
+      that.setData(
+        { popErrorMsg: "性别不能为空" }
+      );
+      that.ohShitfadeOut();
+      return;
+    }
+    if (!e.detail.value.Sfzh) {
+      that.setData(
+        { popErrorMsg: "身份证号不能为空" }
+      );
+      that.ohShitfadeOut();
+      return;
+    }
+    if (!e.detail.value.Department) {
+      that.setData(
+        { popErrorMsg: "所属学院不能为空" }
+      );
+      that.ohShitfadeOut();
+      return;
+    }
+    if (!e.detail.value.BindZfbCode) {
+      that.setData(
+        { popErrorMsg: "支付宝号不能为空" }
+      );
+      that.ohShitfadeOut();
+      return;
+    }
+    if (!e.detail.value.BindYktCode) {
+      that.setData(
+        { popErrorMsg: "一卡通号不能为空" }
+      );
+      that.ohShitfadeOut();
+      return;
+    }
+    console.log("判断表单是否有非空字段", that.data.popErrorMsg);
+
     wx.request({
       url: app.globalData.url,
       data: {
@@ -91,6 +147,10 @@ Page({
         }
       }
     })
+
+
+
+
   },
 
   bindPickerChange: function (e) {
@@ -99,5 +159,16 @@ Page({
       index: e.detail.value,
       TypeId: this.data.array[e.detail.value].ID,
     })
+  },
+
+
+  /**
+   * 表单提交,错误显示定时器
+   */
+  ohShitfadeOut() {
+    var fadeOutTimeout = setTimeout(() => {
+      this.setData({ popErrorMsg: '' });
+      clearTimeout(fadeOutTimeout);
+    }, 3000);
   },
 })

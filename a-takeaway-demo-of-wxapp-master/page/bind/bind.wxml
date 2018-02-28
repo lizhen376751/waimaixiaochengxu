@@ -1,9 +1,10 @@
+<view class="ad_popError" wx:if="{{popErrorMsg}}">{{popErrorMsg}}</view>
 <view>
   <form bindsubmit="formSubmit">
     <view class='inputarray'>
       <view>
         <text>学号</text>
-        <input name="XH"  class="content" type="number" placeholder="学号"></input>
+        <input name="XH" class="content" type="number" placeholder="学号"></input>
       </view>
       <view>
         <text>姓名</text>
@@ -28,7 +29,7 @@
 
       <view>
         <text>身份证号</text>
-        <input name="Sfzh" type="idcard"  placeholder="身份证号"></input>
+        <input name="Sfzh" type="idcard" placeholder="身份证号"></input>
       </view>
 
       <view>
@@ -47,7 +48,7 @@
     </view>
 
 
-    <button class='submit'  disabled = "{{disabled}}" formType="submit">提交</button>
+    <button class='submit' disabled="{{disabled}}" formType="submit">提交</button>
 
   </form>
 
