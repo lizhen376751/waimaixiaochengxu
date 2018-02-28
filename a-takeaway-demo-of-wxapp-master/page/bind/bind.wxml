@@ -28,7 +28,7 @@
 
       <view>
         <text>身份证号</text>
-        <input name="Sfzh" type="idcard" placeholder="身份证号"></input>
+        <input name="Sfzh" type="idcard"  placeholder="身份证号"></input>
       </view>
 
       <view>

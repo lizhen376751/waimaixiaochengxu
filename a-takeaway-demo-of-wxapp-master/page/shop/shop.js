@@ -352,9 +352,11 @@ Page({
               })
             },
             'fail': function (res) {
-              console.log("支付失败,然后模拟页面跳转", restaurantorders);
+              console.log("支付失败,然后模拟页面跳转", res.err_desc);
               wx.redirectTo({
                 url: '/page/order/order?id='+restaurantorders
+
+                
               })
             }
           })

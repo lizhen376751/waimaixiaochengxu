@@ -54,7 +54,7 @@ Page({
         if (res.data == true) {
 
           /**
-           * 点击退出登录事件
+           * 点击提交之后存入数据库
            */
           wx.showModal({
             title: '成功',
