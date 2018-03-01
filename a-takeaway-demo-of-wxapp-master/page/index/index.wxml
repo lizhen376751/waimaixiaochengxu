@@ -1,24 +1,15 @@
-  <view class="container">
+<view class="container">
 
   <view class="header {{scrollDown?'scrolled':''}}">
     <view class="search">
       <image class="icon" src="/imgs/index/icon_search.png" />
-     <input value ="{{searchWords}}" class = "searchinput" bindinput="inputSearch"  focus/>
+      <input value="{{searchWords}}" class="searchinput" bindinput="inputSearch" focus/>
     </view>
-      <button class="yellow {{searchWords.length?'':'disabled'}}" size="mini" hover-class="hover" loading="" plain="" disabled="{{!searchWords.length}}" bindtap="doSearch">搜索
+    <button class="yellow {{searchWords.length?'':'disabled'}}" size="mini" hover-class="hover" loading="" plain="" disabled="{{!searchWords.length}}" bindtap="doSearch">搜索
     </button>
   </view>
 
-  <!-- <view class="header {{scrollDown?'scrolled':''}}">
-    <view class="search" bindtap="tapSearch">
-      <image class="icon" src="/imgs/index/icon_search.png" />
-      <i class="fa fa-home"></i>
-      黄焖鸡米饭
-    </view>
-  </view> -->
-
-  <!-- <scroll-view scroll-y="true" style="height: {{windowHeight}}px; width: {{windowWidth}}px;" bindscroll="onScroll" bindscrolltolower="bottomrequest" bindscrolltoupper="toprequest"> -->
-    <scroll-view>
+  <scroll-view>
     <swiper class="banner" indicator-dots="true" autoplay="true" interval="3000" duration="500">
       <block wx:for="{{banners}}" wx:key="id">
         <swiper-item>
@@ -30,7 +21,6 @@
     <view class="layer">
       <view class="shoplist" wx:for="{{shops}}" wx:key="id" id='{{shops.id}}' wx:for-item="item">
         <view class='shopsimage' bindtap="tapName" data-id="{{item.ID}}">
-          <!-- <image class='shopimage' src="{{item.img}}" /> -->
           <image class='shopimage' src="http://uploadimg.globrand.com/UploadFiles/Ware/201707/20170703_180650284.jpg" />
         </view>
         <view class="shopattr" bindtap="tapName" data-id="{{item.ID}}">

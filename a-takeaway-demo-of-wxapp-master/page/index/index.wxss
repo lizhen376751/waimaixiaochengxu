@@ -8,7 +8,7 @@ page {
 
 
 .header {
-  position: fixed;
+  position: relative;
   display: -webkit-flex;
   left: 0;
   top: 0;
