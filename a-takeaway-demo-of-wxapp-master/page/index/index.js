@@ -52,7 +52,7 @@ Page({
     this.setData({
       shops: [],
     })
-    this.queryAllSeeler(1, this.data.searchWords);
+    this.queryAllSeeler(1, "");
     wx.stopPullDownRefresh() //停止下拉刷新
   },
   //页面上拉触底事件的处理函数
